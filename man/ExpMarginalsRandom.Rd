@@ -64,6 +64,6 @@ unt2 <- mod3$summary.random[[1]][ , 2]
 head(round(cbind(unt1, unt2), 3))
 }
 \references{
-Blangiardo, M., Cameletti, M., Baio, G., & Rue, H. (2013). Spatial and spatio-temporal models with R-INLA. Spatial and spatio-temporal epidemiology, 7, 39-55.
+Blangiardo, Marta, and Michela Cameletti. Spatial and Spatio-temporal Bayesian Models with R-INLA. John Wiley & Sons, 2015.
 }
 

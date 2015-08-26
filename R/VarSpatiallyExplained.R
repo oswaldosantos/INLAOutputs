@@ -4,7 +4,7 @@
 #' @param sims number of random values generated for each area, from the corresponding marginal posterior distribution of the unstructured residual component.
 #' @param rnd integer indicating the number of decimal places (round) or significant digits (signif) to be used.
 #' @return Proportion of variance explained by the spatially structured component, for each of the models in \code{mods}.
-#' @references Blangiardo, M., Cameletti, M., Baio, G., & Rue, H. (2013). Spatial and spatio-temporal models with R-INLA. Spatial and spatio-temporal epidemiology, 7, 39-55.
+#' @references Blangiardo, Marta, and Michela Cameletti. Spatial and Spatio-temporal Bayesian Models with R-INLA. John Wiley & Sons, 2015.
 #' @export
 #' @examples 
 #' data(sp)

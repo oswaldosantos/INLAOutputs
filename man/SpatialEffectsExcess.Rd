@@ -38,6 +38,6 @@ see <- SpatialEffectsExcess(models, mod.names = c('see.mod1', 'see.mod2'))
 summary(see)
 }
 \references{
-Blangiardo, M., Cameletti, M., Baio, G., & Rue, H. (2013). Spatial and spatio-temporal models with R-INLA. Spatial and spatio-temporal epidemiology, 7, 39-55.
+Blangiardo, Marta, and Michela Cameletti. Spatial and Spatio-temporal Bayesian Models with R-INLA. John Wiley & Sons, 2015.
 }
 
