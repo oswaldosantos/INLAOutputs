@@ -1,0 +1,9 @@
+citHeader("To cite INLAOutputs in publications, please use:")
+
+citEntry(entry = "Misc",
+  author = c(person("Oswaldo", "Santos Baquero")),
+  title = "INLAOutputs: Process Outputs form 'INLA' Package",
+  year = "2015",
+  url = "http://oswaldosantos.github.io/capm",
+  textVersion = "Oswaldo Santos Baquero (2015). INLAOutputs: Process Outputs form 'INLA' Package. http://oswaldosantos.github.io/capm"
+)
