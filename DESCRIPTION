@@ -8,8 +8,8 @@ LazyLoad: yes
 URL: https://github.com/oswaldosantos/INLAOutputs
 Authors@R: c(person(given='Oswaldo', family='Santos Baquero',
     email='oswaldosant@gmail.com', role=c("aut", "cre")))
-Version: 0.0.1
-Date: 2015-08-22
+Version: 0.0.2
+Date: 2015-08-26
 NeedsCompilation: no
 Packaged: 2015-08-22 10:20:07 UTC; oswaldo
 Author: Oswaldo Santos Baquero [aut, cre]
