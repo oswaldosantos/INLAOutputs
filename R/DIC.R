@@ -1,6 +1,6 @@
 #' Deviance information criteria
 #' @description Sort and display the Deviance information criteria of INLA models.
-#' @param mods \code{\link{list}} of objects of \code{\link{class}} \code{inla} with computed DIC.
+#' @param ... objects of \code{\link{class}} \code{inla}  with computed DIC.
 #' @param decreasing logical. If \code{FALSE} (default), DIC's are displayed in increasing order.
 #' @return \code{\link{matrix}} with models' DIC.
 #' @references Blangiardo, M., Cameletti, M., Baio, G., & Rue, H. (2013). Spatial and spatio-temporal models with R-INLA. Spatial and spatio-temporal epidemiology, 7, 39-55.
@@ -18,10 +18,16 @@
 #'              family = 'poisson', data = spn,
 #'              control.compute = list(dic = TRUE))
 #' 
-#' DIC(list(mod1 = mod1, mod2 = mod2))
-DIC <- function(mods, decreasing = F) {
+#' DIC(mod1, mod2)
+#' 
+DIC <- function(..., decreasing = F) {
+    mods <- list(...)
+    nms <- deparse(substitute(list(...)))
+    if (any(grepl("list\\(", nms))) {
+        nms <- unlist(strsplit(unlist(substr(nms, 6, nchar(nms)-1)), ", "))
+    }
     dics <- sapply(mods, function(x) x$dic$dic)
-    names(dics) <- names(mods)
+    names(dics) <- nms
     dics <- cbind(sort(dics, decreasing = decreasing))
     colnames(dics) <- 'DIC'
     dics
