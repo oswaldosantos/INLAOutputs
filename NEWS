@@ -1,3 +1,13 @@
+1.0.0
+=====
+
+* ExpMarginalsRandom: simplified syntax and renamed as RandomEffects.
+
+* ExpMarginalsFixed: simplified syntax and renamed as FixedEffects.
+
+* New function: SpecificEffects.
+
+
 0.0.2
 =====
 
