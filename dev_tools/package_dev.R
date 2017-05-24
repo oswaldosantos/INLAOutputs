@@ -7,8 +7,7 @@ document()
 
 # Checking
 run_examples()
-check_doc()
-check()
+check_man()
 
 # News preview
 show_news()
