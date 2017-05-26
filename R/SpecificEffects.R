@@ -47,7 +47,7 @@ SpecificEffects <- function(..., expo = TRUE, rnd = 3) {
         nms <- unlist(strsplit(unlist(substr(nms, 6, nchar(nms)-1)), ", "))
     }
     ses <- sapply(mods,
-                 function(x) as.numeric(RandomEffects(x, expo = expo) *
+                 function(x) as.numeric(as.matrix(RandomEffects(x, expo = expo)) *
                                             FixedEffects(x, expo = expo)$mean))
     colnames(ses) <- nms
     ses
