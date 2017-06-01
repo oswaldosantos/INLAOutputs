@@ -1,10 +1,10 @@
-#' Specific effects
-#' @description Fixed plus random effects of each unit (area).
+#' Unit intercepts
+#' @description Fixed plus random intercepts of each unit (area).
 #' @param ... objects of \code{\link{class}} \code{inla} in random marginals.
 #' @param expo logical. If \code{TRUE} (default), summary statistics are expoentiated.
 #' @param rnd integer indicating the number of decimal places (round) or significant digits (signif) to be used.
-#' @return \code{\link{matrix}} with as many rows as areas and as many columns as models. Exponentiated values represent the posterior mean of area-specific relative risks (odds ratio), compared to the mean relative risk (odds ratio). 
-#' @details \code{\link{RandomEffects}} return the unit-specific effects relative to the fixed effect; thus, exponentiated random effects represent the relative risk (odds ratio) of each unit, relative to the mean relative risk. \code{SpecificEffects} return the fixed effect plus the unit-specific random effects; thus, exponentiated specific effects represent the relative risk (odds ratio) of each unit. Exponentiated specific marginals represent relative risks for models with one of the following likelihoods: \code{poisson}, \code{zeroinflated.poisson.0}, \code{zeroinflated.poisson.1}, \code{zeroinflated.poisson.2}, \code{nbinomial}, \code{zeroinflated.nbinomial.0}, \code{zeroinflated.nbinomial.1}, \code{zeroinflated.nbinomial.2}. Exponentiated random marginals represent odds ratios for models with one of the followinglikelihoods: \code{binomial}, \code{zeroinflated.binomial.0}, \code{zeroinflated.binomial.1}.
+#' @return \code{\link{matrix}} with as many rows as areas and as many columns as models. Exponentiated values represent the posterior mean of unit-specific relative risks (odds ratio), compared to the mean relative risk (odds ratio). 
+#' @details \code{\link{RandomEffects}} return the unit-specific effects relative to the fixed effect; thus, exponentiated random intercepts represent the relative risk (odds ratio) of each unit, relative to the mean relative risk. \code{UnitIntercepts} return the fixed intercept plus the unit-specific random intercepts; thus, exponentiated specific effects represent the relative risk (odds ratio) of each unit. Exponentiated specific marginals represent relative risks for models with one of the following likelihoods: \code{poisson}, \code{zeroinflated.poisson.0}, \code{zeroinflated.poisson.1}, \code{zeroinflated.poisson.2}, \code{nbinomial}, \code{zeroinflated.nbinomial.0}, \code{zeroinflated.nbinomial.1}, \code{zeroinflated.nbinomial.2}. Exponentiated random marginals represent odds ratios for models with one of the followinglikelihoods: \code{binomial}, \code{zeroinflated.binomial.0}, \code{zeroinflated.binomial.1}.
 #' @references Blangiardo, Marta, and Michela Cameletti. Spatial and Spatio-temporal Bayesian Models with R-INLA. John Wiley & Sons, 2015.
 #' @export
 #' @examples 
@@ -15,7 +15,7 @@
 #' 
 ## Area-specific relative-risks.
 #'
-#' summary(SpecificEffects(mod1))
+#' summary(UnitIntercepts(mod1))
 #'
 #' # or equivalent:
 #' lcs <- inla.make.lincombs(id = diag(nrow(spn)),
@@ -40,7 +40,7 @@
 #' summary(exp(mod2$summary.lincomb.derived[ , 2]) /
 #'             exp(as.numeric(mod2$summary.fixed[1])))
 #'
-SpecificEffects <- function(..., expo = TRUE, rnd = 3) {
+UnitIntercepts <- function(..., expo = TRUE, rnd = 3) {
     mods <- list(...)
     nms <- deparse(substitute(list(...)))
     if (any(grepl("list\\(", nms))) {
@@ -48,7 +48,7 @@ SpecificEffects <- function(..., expo = TRUE, rnd = 3) {
     }
     ses <- sapply(mods,
                  function(x) as.numeric(as.matrix(RandomEffects(x, expo = expo)) *
-                                            FixedEffects(x, expo = expo)$mean))
+                                            FixedEffects(x, expo = expo)$mean[1]))
     colnames(ses) <- nms
     ses
 }
