@@ -2,7 +2,7 @@
 #' @description Sort and display the Deviance information criteria of INLA models.
 #' @param ... objects of \code{\link{class}} \code{inla}  with computed DIC.
 #' @param decreasing logical. If \code{FALSE} (default), DIC's are displayed in increasing order.
-#' @return \code{\link{matrix}} with models' DIC.
+#' @return \code{\link{matrix}} with models' DIC, mean deviance and effective number of paramenters.
 #' @references Blangiardo, M., Cameletti, M., Baio, G., & Rue, H. (2013). Spatial and spatio-temporal models with R-INLA. Spatial and spatio-temporal epidemiology, 7, 39-55.
 #' @export
 #' @examples 
@@ -20,15 +20,14 @@
 #' 
 #' DIC(mod1, mod2)
 #' 
-DIC <- function(..., decreasing = F) {
+DIC <- function(..., decreasing = FALSE) {
     mods <- list(...)
     nms <- deparse(substitute(list(...)))
     if (any(grepl("list\\(", nms))) {
         nms <- unlist(strsplit(unlist(substr(nms, 6, nchar(nms)-1)), ", "))
     }
-    dics <- sapply(mods, function(x) x$dic$dic)
-    names(dics) <- nms
-    dics <- cbind(sort(dics, decreasing = decreasing))
-    colnames(dics) <- 'DIC'
-    dics
+    dics <- t(sapply(mods,
+                   function(x) unlist(x$dic[c("dic", "mean.deviance", "p.eff")])))
+    rownames(dics) <- nms
+    dics[order(dics[, 1], decreasing = decreasing), ]
 }

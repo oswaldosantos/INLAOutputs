@@ -4,7 +4,7 @@
 \alias{WAIC}
 \title{Watanabe-Akaike information criteria}
 \usage{
-WAIC(..., decreasing = F)
+WAIC(..., decreasing = FALSE)
 }
 \arguments{
 \item{...}{objects of \code{\link{class}} \code{inla}  with computed WAIC.}

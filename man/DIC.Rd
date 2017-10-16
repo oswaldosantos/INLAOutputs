@@ -4,7 +4,7 @@
 \alias{DIC}
 \title{Deviance information criteria}
 \usage{
-DIC(..., decreasing = F)
+DIC(..., decreasing = FALSE)
 }
 \arguments{
 \item{...}{objects of \code{\link{class}} \code{inla}  with computed DIC.}
@@ -12,7 +12,7 @@ DIC(..., decreasing = F)
 \item{decreasing}{logical. If \code{FALSE} (default), DIC's are displayed in increasing order.}
 }
 \value{
-\code{\link{matrix}} with models' DIC.
+\code{\link{matrix}} with models' DIC, mean deviance and effective number of paramenters.
 }
 \description{
 Sort and display the Deviance information criteria of INLA models.

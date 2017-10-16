@@ -20,15 +20,14 @@
 #' 
 #' WAIC(mod1, mod2)
 #' 
-WAIC <- function(..., decreasing = F) {
+WAIC <- function(..., decreasing = FALSE) {
     mods <- list(...)
     nms <- deparse(substitute(list(...)))
     if (any(grepl("list\\(", nms))) {
         nms <- unlist(strsplit(unlist(substr(nms, 6, nchar(nms)-1)), ", "))
     }
-    waics <- sapply(mods, function(x) x$waic$waic)
-    names(waics) <- nms
-    waics <- cbind(sort(waics, decreasing = decreasing))
-    colnames(waics) <- 'WAIC'
-    waics
+    waics <- t(sapply(mods,
+                     function(x) unlist(x$waic[c("waic", "p.eff")])))
+    rownames(waics) <- nms
+    waics[order(waics[, 1], decreasing = decreasing), ]
 }
