@@ -20,14 +20,12 @@ Sort and display the Watanabe-Akaike information criteria of INLA models.
 \examples{
 data(sp)
 
-mod1 <- inla(aan ~ offset(log(eaan)) +
-                 f(id, model = 'bym', graph = sp.adj),
-             family = 'poisson', data = spn,
+mod1 <- inla(aan ~ f(id, model = 'bym', graph = sp.adj),
+             family = 'poisson', data = spn, E = eaan,
              control.compute = list(waic = TRUE))
 
-mod2 <- inla(aan ~ shvn + offset(log(eaan))+
-                 f(id, model = 'bym', graph = sp.adj),
-             family = 'poisson', data = spn,
+mod2 <- inla(aan ~ shvn + f(id, model = 'bym', graph = sp.adj),
+             family = 'poisson', data = spn, E = eaan,
              control.compute = list(waic = TRUE))
 
 WAIC(mod1, mod2)

@@ -1,6 +1,6 @@
 #' Posterior predictive p-value
 #' @description Computes de probability Pr(predicted_i <= observed_i | observed).
-#' @param ... objects of \code{\link{class}} \code{inla} with computed fitted marginal.
+#' @param ... objects of \code{\link{class}} \code{inla} with computed fitted marginals.
 #' @param observed \code{\link{vector}} observed values.
 #' @param cutoff \code{\link{vector}} with lower and upper values to define the tails of the p-values cumulative distribution. Default: c(0.1, 0.9).
 #' @param decreasing logical. If \code{FALSE} (default), models are displayed in increasing order, according to the proportion of values in both tails (the first model has the best fit).
@@ -10,12 +10,11 @@
 #' @examples 
 #' data(sp)
 #' 
-#' mod <- inla(aan ~ offset(log(eaan)) +
-#'                  f(id, model = 'bym', graph = sp.adj),
-#'              family = 'poisson', data = spn,
+#' mod <- inla(aan ~ f(id, model = 'bym', graph = sp.adj),
+#'              family = 'poisson', data = spn, E= eaan,
 #'              control.predictor=list(link = 1, compute = TRUE))
 #'
-#' PredPValue(mod, spn$aan)
+#' PredPValue(mod, observed = spn$aan)
 PredPValue <- function(..., observed = NULL, cutoff = c(0.1, 0.9), decreasing = FALSE) {
     mods <- list(...)
     nms <- deparse(substitute(list(...)))

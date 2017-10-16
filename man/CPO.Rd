@@ -7,14 +7,14 @@
 CPO(..., failure_cutoff = 0, decreasing = TRUE)
 }
 \arguments{
-\item{...}{objects of \code{\link{class}} \code{inla}  with computed CPO's.}
+\item{...}{models of \code{\link{class}} \code{inla} with computed CPO's.}
 
 \item{failure_cutoff}{value between 0 and 1. CPO's with a failure score greater than \code{failure_cutoff} are considered unreliable and are ignored.}
 
-\item{decreasing}{logical. If \code{TRUE} (default), CPO's are displayed in decreasing order.}
+\item{decreasing}{logical. If \code{TRUE} (default), CPO's are displayed in decreasing order (higher values indicate better prediction).}
 }
 \value{
-\code{\link{matrix}} with the sum of the log of CPO and the proportion of failures of each models' CPO.
+\code{\link{matrix}} with the sum of the log of CPO's and the proportion of failures of each models' CPO.
 }
 \description{
 Sort and display the sum of the log of CPO's of INLA models.
@@ -22,14 +22,12 @@ Sort and display the sum of the log of CPO's of INLA models.
 \examples{
 data(sp)
 
-mod1 <- inla(aan ~ offset(log(eaan)) +
-                 f(id, model = 'bym', graph = sp.adj),
-             family = 'poisson', data = spn,
+mod1 <- inla(aan ~ f(id, model = 'bym', graph = sp.adj),
+             family = 'poisson', data = spn, E = eaan,
              control.compute = list(cpo = TRUE))
 
-mod2 <- inla(aan ~ shvn + offset(log(eaan))+
-                 f(id, model = 'bym', graph = sp.adj),
-             family = 'poisson', data = spn,
+mod2 <- inla(aan ~ shvn + f(id, model = 'bym', graph = sp.adj),
+             family = 'poisson', data = spn,  E = eaan,
              control.compute = list(cpo = TRUE))
 
 CPO(mod1, mod2)
