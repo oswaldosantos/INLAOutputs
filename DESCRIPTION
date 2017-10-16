@@ -1,7 +1,7 @@
 Package: INLAOutputs
 Type: Package
 Title: Process selected outputs from the 'INLA' package
-Depends: R (>= 3.2.1), INLA
+Depends: R (>= 3.4.1), INLA
 Description: Functions to display efixed and random effects (marginals),
     calculate the proportion of variance spacially explained and the area-specific
     excess risk (Besg-York-Mollie models), and display the DIC and WAIC
@@ -11,8 +11,8 @@ LazyLoad: yes
 URL: https://github.com/oswaldosantos/INLAOutputs
 Authors@R: c(person(given='Oswaldo', family='Santos Baquero',
     email='baquero@usp.br', role=c("aut", "cre")))
-Version: 1.1.0
-Date: 2017-06-01
+Version: 1.2.0
+Date: 2017-10-16
 NeedsCompilation: no
 Author: Oswaldo Santos Baquero [aut, cre]
 Maintainer: Oswaldo Santos Baquero <baquero@usp.br>

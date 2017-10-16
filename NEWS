@@ -1,3 +1,16 @@
+1.2.0
+=====
+
+* CPO and PredPValue: new functions.
+
+* FixedEffects: new argument hpd and bug fixed.
+
+* RandomEffects and SaptialEffectsExcess: simplified output.
+
+* WAIC and DIC: number of effective parameters and mean deviance (DIC) in output.
+
+* 
+
 1.1.0
 =====
 
