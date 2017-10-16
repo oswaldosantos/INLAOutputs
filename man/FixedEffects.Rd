@@ -4,21 +4,21 @@
 \alias{FixedEffects}
 \title{Fixed effects}
 \usage{
-FixedEffects(model = NULL, mean = TRUE, sd = FALSE, quantiles = c(0.025,
-  0.975), expo = TRUE, rnd = 3)
+FixedEffects(model = NULL, quantiles = c(0.025, 0.975), hpd = 0.95,
+  sd = FALSE, expo = TRUE, rnd = 3)
 }
 \arguments{
 \item{model}{object of \code{\link{class}} \code{inla} with fixed marginals.}
 
-\item{mean}{logical. If \code{TRUE} (default), the mean is computed.}
+\item{quantiles}{\code{\link{numeric}} \code{\link{vector}} to indicate the quantiles to be computed.}
 
 \item{sd}{logical. If \code{FALSE} (default), the standard deviation is not returned.}
-
-\item{quantiles}{\code{\link{numeric}} \code{\link{vector}} to indicate the quantiles to be computed.}
 
 \item{expo}{logical. If \code{TRUE} (default), summary statistics are expoentiated.}
 
 \item{rnd}{integer indicating the number of decimal places (round) or significant digits (signif) to be used.}
+
+\item{hpd.}{Proportion of the distribution included in the highest density interval.}
 }
 \value{
 \code{\link{matrix}} with summary statistics for relative risks or odds ratios.

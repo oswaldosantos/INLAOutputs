@@ -1,9 +1,9 @@
 #' Fixed effects
 #' @description Summary statistics of fixed marginals
 #' @param model object of \code{\link{class}} \code{inla} with fixed marginals.
-#' @param mean logical. If \code{TRUE} (default), the mean is computed.
-#' @param sd logical. If \code{FALSE} (default), the standard deviation is not returned.
 #' @param quantiles \code{\link{numeric}} \code{\link{vector}} to indicate the quantiles to be computed.
+#' @param hpd. Proportion of the distribution included in the highest density interval. 
+#' @param sd logical. If \code{FALSE} (default), the standard deviation is not returned.
 #' @param expo logical. If \code{TRUE} (default), summary statistics are expoentiated.
 #' @param rnd integer indicating the number of decimal places (round) or significant digits (signif) to be used.
 #' @return \code{\link{matrix}} with summary statistics for relative risks or odds ratios.
@@ -15,22 +15,29 @@
 #' mod <- inla(aan ~ shvn + f(id, model = 'bym', graph = sp.adj),
 #'             E = eaan, family = 'poisson', data = spn)
 #' FixedEffects(mod)
-FixedEffects <- function(model = NULL, mean = TRUE, sd = FALSE, quantiles = c(.025, .975), expo = TRUE, rnd = 3) {
-    if (mean) {
-        mn <- model$summary.fixed[, 1:2]
-    }
-    qts <- sapply(model$marginals.fixed,
-                  function(x) inla.qmarginal(quantiles, x))
-    rownames(qts) <- quantiles
-    qts <- t(qts)
-    if (sd) {
-        mf <- cbind(mn, qts)
-    } else {
-        mf <- cbind(mn, qts)[, -2]
-    }
+FixedEffects <- function(model = NULL, quantiles = c(.025, .975), hpd = 0.95, sd = FALSE, expo = TRUE, rnd = 3) {
     if (expo) {
-        round(exp(mf), rnd)
+        margs <- lapply(model$marginals.fixed,
+                            function(x) inla.tmarginal(exp, x))
+        mean <- sapply(model$marginals.fixed, function(x) inla.emarginal(exp, x))
     } else {
-        round(mf, rnd)
+        margs <- model$marginals.fixed
+        mean <- model$summary.fixed[, 1]
     }
+    qts <- sapply(margs,
+                  function(x) inla.qmarginal(quantiles, x))
+    if (!is.null(hpd)) {
+        hpds <- sapply(margs,
+                       function(x) inla.hpdmarginal(hpd, x))
+    }
+    qts <- rbind(qts, hpds)
+    rownames(qts) <- c(paste0("qt", quantiles),
+                       paste0(c("hpd_ll", "hpd_ul"), hpd))
+    qts <- t(qts)
+    res <- cbind(mean, qts)
+    if (sd) {
+        sd <- sapply(margs, function(x) inla.emarginal(sd, x))
+        res <- cbind(res, sd)
+    }
+    round(res, rnd)
 }
