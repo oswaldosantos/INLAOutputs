@@ -15,33 +15,73 @@
 #'              family = 'poisson', data = spn)
 #' summary(RandomEffects(mod1))
 #' 
-RandomEffects <- function (..., expo = TRUE, rnd = 3) 
-{
-    mods <- list(...)
-    nms <- deparse(substitute(list(...)))
-    if (any(grepl("list\\(", nms))) {
-        nms <- unlist(strsplit(unlist(substr(nms, 6, nchar(nms) - 1)), ", "))
-    }
+RandomEffects <- function (..., expo = TRUE, rnd = 3) {
+  mods <- list(...)
+  nms <- deparse(substitute(list(...)))
+  if (any(grepl("list\\(", nms))) {
+    nms <- unlist(strsplit(unlist(substr(nms, 6, nchar(nms) - 
+                                           1)), ", "))
+  }
+  if (!expo) {
     RandEffs <- function(x) {
-        if (all(x$model.random == "BYM model")) {
-            sapply(x$summary.random, function(y) y$mean[1:(nrow(y)/2)])
-        } else {
-            sapply(x$summary.random, function(y) y$mean)
+      rand_effs <- list()
+      for (i in 1:length(x$summary.random)) {
+        if (x$model.random[i] == "BYM model") {
+          idx <- 1:(length(x$marginals.random[[i]])/2)
+          rand_effs[[i]] <- x$summary.random[[i]]$mean[idx]
         }
+        else {
+          rand_effs[[i]] <- x$summary.random[[i]]$mean
+        }
+      }
+      names(rand_effs) <- names(x$marginals.random)
+      rand_effs
     }
-    re <- lapply(mods, RandEffs)
-    if (class(re[[1]]) == "list" & expo) {
-        return(lapply(re, function(x) lapply(x, exp)))
-    } else if (expo) {
-        re <- lapply(re, exp)
+    re <- sapply(mods, RandEffs)
+    re <- sapply(re, function(x) x)
+    re_nms <- lapply(mods, function(x) names(x$summary.random))
+    if (length(mods) > 1) {
+      re_nms <- unlist(mapply(function(x, y) paste0(x, "_", y), 
+                              nms, re_nms))
     }
-    if (length(re) == 1) {
-        return(data.frame(re))
+    if (is.list(re)) {
+      names(re) <- unlist(re_nms)
+    } else {
+      re <- as.data.frame(re)
+      names(re) <- unlist(re_nms)
     }
-    re_nms <- lapply(re, function(x) colnames(x))
-    re_nms <- unlist(mapply(function(x, y) paste0(x, "_", y), nms, re_nms))
+    return(re)
+  }
+  else {
+    RandEffs2 <- function(x) {
+      rand_effs <- list()
+      for (i in 1:length(x$summary.random)) {
+        if (x$model.random[i] == "BYM model") {
+          idx <- 1:(length(x$marginals.random[[i]])/2)
+          rand_effs[[i]] <- x$marginals.random[[i]][idx]
+        }
+        else {
+          rand_effs[[i]] <- x$marginals.random[[i]]
+        }
+      }
+      names(rand_effs) <- names(x$marginals.random)
+      rand_effs
+    }
+    re <- sapply(mods, RandEffs2)
+  }
+  re <- sapply(re, function(x) sapply(x, function(y) inla.emarginal(exp, 
+                                                                    y)))
+  re_nms <- lapply(mods, function(x) names(x$summary.random))
+  if (length(mods) > 1) {
+    re_nms <- unlist(mapply(function(x, y) paste0(x, "_", y), 
+                            nms, re_nms))
+  }
+  if (is.list(re)) {
+    re <- sapply(re, function(x) unname(x))
+    names(re) <- unlist(re_nms)
+  } else {
     re <- as.data.frame(re)
-    names(re) <- unname(re_nms)
+    names(re) <- unlist(re_nms)
+  }
     re
-}
-
+  }
