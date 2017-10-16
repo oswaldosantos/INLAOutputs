@@ -19,18 +19,43 @@
 #'
 #' see <- SpatialEffectsExcess(mod1, mod2)
 #' summary(see)
-SpatialEffectsExcess <- function(..., rnd = 3) {
-  mods <- list(...)
-  nms <- deparse(substitute(list(...)))
-  if (any(grepl("list\\(", nms))) {
-    nms <- unlist(strsplit(unlist(substr(nms, 6, nchar(nms)-1)), ", "))
-  }
-  n <- nrow(mods[[1]]$model.matrix)
-  res <- matrix(rep(NA, length(mods) * n), nrow = n)
-  for (i in 1:length(mods)) {
-    res[ , i] <- unlist(lapply(mods[[i]]$marginals.random[[1]][1:n],
-                               function(x) {1 - inla.pmarginal(0, x)}))
-  }
-  names(res) <- nms
-  round(res, rnd)
+SpatialEffectsExcess <- function (..., rnd = 3) 
+{
+    mods <- list(...)
+    nms <- deparse(substitute(list(...)))
+    if (any(grepl("list\\(", nms))) {
+        nms <- unlist(strsplit(unlist(substr(nms, 6, nchar(nms) - 
+                                                 1)), ", "))
+    }
+    res <- list()
+    for (i in 1:length(mods)) {
+        res2 <- list()
+        for (j in 1:length(mods[[i]]$marginals.random)) {
+            tmp <- mods[[i]]$marginals.random[[j]]
+            if (mods[[i]]$model.random[j] == "BYM model") {
+                res2[[j]] <- unname(unlist(sapply(tmp[1:(length(tmp) / 2)], 
+                                                  function(x) {
+                                                      1 - inla.pmarginal(0, x)
+                                                  })))
+            } else {
+                res2[[j]] <- unname(unlist(sapply(tmp[1:length(tmp)], 
+                                                  function(x) {
+                                                      1 - inla.pmarginal(0, x)
+                                                  })))
+            }
+        }
+        names(res2) <- names(mods[[i]]$marginals.random)
+        res[[i]] <- res2
+    }
+    if (length(res) > 1) {
+        names(res) <- nms
+    }
+    re_nms <- sapply(mods, function(x) names(x$summary.random))
+    if (length(mods) > 1) {
+        re_nms <- unlist(mapply(function(x, y) paste0(x, "_", y), 
+                                nms, re_nms))
+    }
+    res <- sapply(res, function(x) sapply(x, function(x2) x2))
+    colnames(res) <- re_nms
+    round(res, rnd)
 }
