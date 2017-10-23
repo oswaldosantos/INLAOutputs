@@ -68,14 +68,17 @@ RandomEffectsExcess <- function (..., cutoff = 0, rnd = 3)
         }
         return(res)
     }
-    res2 <- res[[1]]
-    for (i in 2:length(res)) {
-        res2 <- c(res2, res[[i]])
+    if (is.list(res[[1]])) {
+        res2 <- res[[1]]
+        for (i in 2:length(res)) {
+            res2 <- c(res2, res[[i]])
+        }
+        res <- res2
     }
-    names(res2) <- re_nms
-    if (sum(diff(sapply(res2, length))) == 0) {
-        return(as.data.frame(res2))
+    names(res) <- re_nms
+    if (sum(diff(sapply(res, length))) == 0) {
+        return(as.data.frame(res))
     }
-    res2
+    res
 }
 
