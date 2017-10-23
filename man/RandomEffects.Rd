@@ -14,13 +14,10 @@ RandomEffects(..., expo = TRUE, rnd = 3)
 \item{rnd}{integer indicating the number of decimal places (round) or significant digits (signif) to be used.}
 }
 \value{
-If \code{...} is an object with more than one random model and these differ in the number of aggregation units (i.e. a multilevel model with more than two levels of different size), a list with as many elements as random models. Otherwise, a \code{\link{data.frame}} with as many rows as aggregation units and as many columns as random mmodels If \code{...} is a set of one or more obejcts and all have a BYM random model, the \code{data.frame} will have only the first half of rows present in the \code{summary.random} element of the objects (iid plus BYM residuals); the second half has only the BYM residuals.
+\code{\link{vector}} if only one model with one random effect is evaluated; \code{\link{data.frame}} or \code{\link{list}} otherwise.
 }
 \description{
 Alternative display of computed random marginals.
-}
-\details{
-Exponentiated values represent the posterior mean of unit-specific relative risks (odds ratio), relative to the mean relative risk (odds ratio). Exponentiated random marginals represent relative risks for models with one of the following likelihoods: \code{poisson}, \code{zeroinflated.poisson.0}, \code{zeroinflated.poisson.1}, \code{zeroinflated.poisson.2}, \code{nbinomial}, \code{zeroinflated.nbinomial.0}, \code{zeroinflated.nbinomial.1}, \code{zeroinflated.nbinomial.2}. Exponentiated random marginals represent odds ratios for models with one of the followinglikelihoods: \code{binomial}, \code{zeroinflated.binomial.0}, \code{zeroinflated.binomial.1}.
 }
 \examples{
 data(sp)

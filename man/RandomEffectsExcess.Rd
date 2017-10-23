@@ -17,7 +17,7 @@ RandomEffectsExcess(..., cutoff = 0, rnd = 3)
 \code{\link{vector}} if only one model with one random effect is evaluated; \code{\link{data.frame}} or \code{\link{list}} otherwise.
 }
 \description{
-Probability of random effects being in excess.
+@description Probability of random effects being in excess.
 }
 \examples{
 data(sp)
@@ -30,7 +30,7 @@ mod2 <- inla(aan ~ shvn + f(id, model = 'bym', graph = sp.adj),
              E = eaan,
              family = 'poisson', data = spn)
 
-see <- RandomEffectsExcess(mod1, mod2, cutoff = 0)
+see <- RandomEffectsExcess(mod1, mod2, cutoff = .8)
 summary(see)
 }
 \references{

@@ -1,5 +1,5 @@
 #' Spatial effects in excess
-#' @description Probability of random effects being in excess.
+#' @description @description Probability of random effects being in excess.
 #' @param ... object of \code{\link{class}} \code{inla} with outputs from a BYM model.
 #' @param cutoff value above which random effects would be in excess. The cutoff is ued for untransformed marginal posteriors, so \code{cutoff = 0} (default) is used to calculate the probability of relative risk (odds ratio) > 1.
 #' @param rnd integer indicating the number of decimal places (round) or significant digits (signif) to be used.
@@ -17,7 +17,7 @@
 #'              E = eaan,
 #'              family = 'poisson', data = spn)
 #'
-#' see <- RandomEffectsExcess(mod1, mod2, cutoff = 0)
+#' see <- RandomEffectsExcess(mod1, mod2, cutoff = .8)
 #' summary(see)
 RandomEffectsExcess <- function (..., cutoff = 0, rnd = 3) 
 {
@@ -57,11 +57,11 @@ RandomEffectsExcess <- function (..., cutoff = 0, rnd = 3)
         res <- unlist(res)
         return(round(res, rnd))
     }
-    names(res) <- re_nms
-    res <- lapply(res, function(x) round(x, rnd))
-    try({
-        return(as.data.frame(res))
-    }, silent = TRUE)
+    if (is.matrix(res)) {
+        colnames(res) <- re_nms
+    } else {
+        names(res) <- re_nms   
+    }
     res
 }
 
