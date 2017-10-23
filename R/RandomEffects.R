@@ -42,7 +42,7 @@ RandomEffects <- function (..., expo = TRUE, rnd = 3)
                     tmp <- mods[[i]]$summary.random[[j]]$mean
                     res2[[j]] <- unname(unlist(tmp[1:length(tmp)]))
                 } else {
-                    tmp <- mods[[i]]$marginals.random[[j]]$mean
+                    tmp <- mods[[i]]$marginals.random[[j]]
                     res2[[j]] <- unname(unlist(sapply(tmp[1:length(tmp)], 
                                                       function(x) {
                                                           inla.emarginal(exp, x)

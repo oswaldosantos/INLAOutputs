@@ -52,7 +52,7 @@ RandomEffectsExcess <- function (..., cutoff = 0, rnd = 3)
         re_nms <- unlist(mapply(function(x, y) paste0(x, "_", 
                                                       y), nms, re_nms))
     }
-    res <- sapply(res, function(x) x)
+    res <- res[[1]]
     if (length(res) == 1) {
         res <- unlist(res)
         return(round(res, rnd))
