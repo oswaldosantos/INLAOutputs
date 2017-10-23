@@ -4,13 +4,20 @@ R package to process selected outputs form the `INLA` package.
 
 The `INLAOutputs` package has functions for the following tasks:
 
-* Display fixed and random effects (marginals). When exponentiated (default), the fixed effects (FixedEffects function) represent posterior relative risks, the random effects (RandomEffects) reprsent area-specific posterior relative risks compared to the mean relative risk, and the combined fixed and random effects (SpecificEffects) represent area-specific relative risks.
+* Alternative return of fixed effects (exponentiated by default, highest probability density, quantiles).
 
-* Calculate the proportion of variance spatially explained in Besg-York-Molliè models (VarSpatiallyExplained function).
+* Alternative return of random effects (exponentiated by default).
 
-* Calculate the area-specific excess risk in Besg-York-Molliè models (SpatialEffectsExcess). The excess risk is given by the probabilty of the relative risk is greater than 1.  
+* Calculate random effects in excess.
 
-* Display computed WAIC or DIC of multiple models (WAIC and DIC functions).  
+* Calculate the proportion of variance explained by each component of variance.
+
+* Calculate measures of godness-of-fit and predictive performance.
+
+
+* The functions to process random effects accept more than one model and process all random effects of each model.
+
+* The functions to calculate measure of godness-of-fit and predictive preformance also accept more than one model and return models in order given by the performance.
 
 To install `INLAOutputs`, use `install_github('oswaldosantos/INLAOutputs')` (make sure that `devtools` package is loaded).
 
