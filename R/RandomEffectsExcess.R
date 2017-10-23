@@ -52,16 +52,30 @@ RandomEffectsExcess <- function (..., cutoff = 0, rnd = 3)
         re_nms <- unlist(mapply(function(x, y) paste0(x, "_", 
                                                       y), nms, re_nms))
     }
-    res <- res[[1]]
+    if (length(nms) == 1) {
+        res <- res[[1]]
+    }
     if (length(res) == 1) {
         res <- unlist(res)
         return(round(res, rnd))
     }
-    if (is.matrix(res)) {
-        colnames(res) <- re_nms
-    } else {
-        names(res) <- re_nms   
+    if (all(sapply(res, length) == 1)) {
+        res <- lapply(res, unlist)
+        res <- lapply(res, function(x) round(x, rnd))
+        names(res) <- re_nms
+        if (sum(diff(sapply(res, length))) == 0) {
+            return(as.data.frame(res))
+        }
+        return(res)
     }
-    res
+    res2 <- res[[1]]
+    for (i in 2:length(res)) {
+        res2 <- c(res2, res[[i]])
+    }
+    names(res2) <- re_nms
+    if (sum(diff(sapply(res2, length))) == 0) {
+        return(as.data.frame(res2))
+    }
+    res2
 }
 

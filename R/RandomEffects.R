@@ -64,8 +64,8 @@ RandomEffects <- function (..., expo = TRUE, rnd = 3)
     }
     names(res) <- re_nms
     res <- lapply(res, function(x) round(x, rnd))
-    try({
+    if (sum(diff(sapply(res, length))) == 0) {
         return(as.data.frame(res))
-    }, silent = TRUE)
+    }
     res
 }
