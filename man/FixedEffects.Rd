@@ -21,7 +21,7 @@ FixedEffects(model = NULL, quantiles = c(0.025, 0.975), hpd = 0.95,
 \item{hpd.}{Proportion of the distribution included in the highest density interval.}
 }
 \value{
-\code{\link{matrix}} with summary statistics for relative risks or odds ratios.
+\code{\link{matrix}} with summary statistics.
 }
 \description{
 Summary statistics of fixed marginals

@@ -16,7 +16,7 @@ UnitIntercepts(..., ran_marg = NULL, expo = TRUE, rnd = 3)
 \item{rnd}{integer indicating the number of decimal places (round) or significant digits (signif) to be used.}
 }
 \value{
-\code{\link{matrix}} with as many rows as areas and as many columns as models. Exponentiated values represent the posterior mean of unit-specific relative risks (odds ratio), compared to the mean relative risk (odds ratio).
+\code{\link{vector}} if only one model with one random effect is evaluated; \code{\link{data.frame}} or \code{\link{list}} otherwise.
 }
 \description{
 Fixed intercept plus random marginals of each unit.
