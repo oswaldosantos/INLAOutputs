@@ -1,9 +1,9 @@
 #' Spatial effects in excess
-#' @description Probability of the area-specific relative risk (odds ratio) being > 1. Mean relative risk (odds ratio) is the reference category.
+#' @description Probability of random effects being in excess.
 #' @param ... object of \code{\link{class}} \code{inla} with outputs from a BYM model.
+#' @param cutoff value above which random effects would be in excess. The cutoff is ued for untransformed marginal posteriors, so \code{cutoff = 0} (default) is used to calculate the probability of relative risk (odds ratio) > 1.
 #' @param rnd integer indicating the number of decimal places (round) or significant digits (signif) to be used.
-#' @return \code{\link{matrix}} with as many rows as areas and as many columns as models in \code{mod}. 
-#' @details Spatial effects in excess are represented in terms of relative risks for models with one of the following likelihoods: \code{poisson}, \code{zeroinflated.poisson.0}, \code{zeroinflated.poisson.1}, \code{zeroinflated.poisson.2}, \code{nbinomial}, \code{zeroinflated.nbinomial.0}, \code{zeroinflated.nbinomial.1}, \code{zeroinflated.nbinomial.2}. Sptial effects in excess are represented in terms of odds ratios for models with one of the followinglikelihoods: \code{binomial}, \code{zeroinflated.binomial.0}, \code{zeroinflated.binomial.1}.
+#' @return \code{\link{vector}} if only one model with one random effect is evaluated; \code{\link{data.frame}} or \code{\link{list}} otherwise.
 #' @references Blangiardo, Marta, and Michela Cameletti. Spatial and Spatio-temporal Bayesian Models with R-INLA. John Wiley & Sons, 2015.
 #' @export
 #' @examples 
@@ -17,9 +17,9 @@
 #'              E = eaan,
 #'              family = 'poisson', data = spn)
 #'
-#' see <- SpatialEffectsExcess(mod1, mod2)
+#' see <- RandomEffectsExcess(mod1, mod2, cutoff = 0)
 #' summary(see)
-SpatialEffectsExcess <- function (..., rnd = 3) 
+RandomEffectsExcess <- function (..., cutoff = 0, rnd = 3) 
 {
     mods <- list(...)
     nms <- deparse(substitute(list(...)))
@@ -33,29 +33,35 @@ SpatialEffectsExcess <- function (..., rnd = 3)
         for (j in 1:length(mods[[i]]$marginals.random)) {
             tmp <- mods[[i]]$marginals.random[[j]]
             if (mods[[i]]$model.random[j] == "BYM model") {
-                res2[[j]] <- unname(unlist(sapply(tmp[1:(length(tmp) / 2)], 
+                res2[[j]] <- unname(unlist(sapply(tmp[1:(length(tmp)/2)], 
                                                   function(x) {
-                                                      1 - inla.pmarginal(0, x)
+                                                      1 - inla.pmarginal(cutoff, x)
                                                   })))
-            } else {
+            }
+            else {
                 res2[[j]] <- unname(unlist(sapply(tmp[1:length(tmp)], 
                                                   function(x) {
-                                                      1 - inla.pmarginal(0, x)
+                                                      1 - inla.pmarginal(cutoff, x)
                                                   })))
             }
         }
-        names(res2) <- names(mods[[i]]$marginals.random)
         res[[i]] <- res2
-    }
-    if (length(res) > 1) {
-        names(res) <- nms
     }
     re_nms <- sapply(mods, function(x) names(x$summary.random))
     if (length(mods) > 1) {
-        re_nms <- unlist(mapply(function(x, y) paste0(x, "_", y), 
-                                nms, re_nms))
+        re_nms <- unlist(mapply(function(x, y) paste0(x, "_", 
+                                                      y), nms, re_nms))
     }
-    res <- sapply(res, function(x) sapply(x, function(x2) x2))
-    colnames(res) <- re_nms
-    round(res, rnd)
+    res <- sapply(res, function(x) x)
+    if (length(res) == 1) {
+        res <- unlist(res)
+        return(round(res, rnd))
+    }
+    names(res) <- re_nms
+    res <- lapply(res, function(x) round(x, rnd))
+    try({
+        return(as.data.frame(res))
+    }, silent = TRUE)
+    res
 }
+
