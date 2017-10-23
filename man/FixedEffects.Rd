@@ -26,9 +26,6 @@ FixedEffects(model = NULL, quantiles = c(0.025, 0.975), hpd = 0.95,
 \description{
 Summary statistics of fixed marginals
 }
-\details{
-Exponentiated fixed marginals represent relative risks for models with one of the following likelihoods: \code{poisson}, \code{zeroinflated.poisson.0}, \code{zeroinflated.poisson.1}, \code{zeroinflated.poisson.2}, \code{nbinomial}, \code{zeroinflated.nbinomial.0}, \code{zeroinflated.nbinomial.1}, \code{zeroinflated.nbinomial.2}. Exponentiated random marginals represent odds ratios for models with one of the followinglikelihoods: \code{binomial}, \code{zeroinflated.binomial.0}, \code{zeroinflated.binomial.1}.
-}
 \examples{
 data(sp)
 mod <- inla(aan ~ shvn + f(id, model = 'bym', graph = sp.adj),
