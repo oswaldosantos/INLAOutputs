@@ -2,17 +2,21 @@ Package: INLAOutputs
 Type: Package
 Title: Process selected outputs from the 'INLA' package
 Depends: R (>= 3.4.1), INLA
-Description: Functions to display efixed and random effects (marginals),
-    calculate the proportion of variance spacially explained and the area-specific
-    excess risk (Besg-York-Mollie models), and display the DIC and WAIC
-    of multiple models.
+Description: Functions to return fixed and random effects, calculate measures
+    of godness-of-fit and predictive performance, calculate random effects in
+    excess, and calculate the proportion of variance explained by each
+    component of variance. The functions to process random effects accept more
+    than one model and process all random effects of each model. The functions,
+    to calculate measure of godness-of-fit and predictive preformance also
+    accept more than one model and return models in order given by the
+    performance.
 License: GPL (>= 2)
 LazyLoad: yes
 URL: https://github.com/oswaldosantos/INLAOutputs
 Authors@R: c(person(given='Oswaldo', family='Santos Baquero',
     email='baquero@usp.br', role=c("aut", "cre")))
-Version: 1.2.1
-Date: 2017-10-16
+Version: 1.2.2
+Date: 2017-10-23
 NeedsCompilation: no
 Author: Oswaldo Santos Baquero [aut, cre]
 Maintainer: Oswaldo Santos Baquero <baquero@usp.br>
