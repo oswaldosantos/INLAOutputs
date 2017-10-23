@@ -21,9 +21,6 @@ UnitIntercepts(..., ran_marg = NULL, expo = TRUE, rnd = 3)
 \description{
 Fixed intercept plus random marginals of each unit.
 }
-\details{
-\code{\link{RandomEffects}} return the unit-specific effects relative to the fixed effect; thus, exponentiated random intercepts represent the relative risk (odds ratio) of each unit, relative to the mean relative risk. \code{UnitIntercepts} return the fixed intercept plus the unit-specific random intercepts; thus, exponentiated specific effects represent the relative risk (odds ratio) of each unit. Exponentiated specific marginals represent relative risks for models with one of the following likelihoods: \code{poisson}, \code{zeroinflated.poisson.0}, \code{zeroinflated.poisson.1}, \code{zeroinflated.poisson.2}, \code{nbinomial}, \code{zeroinflated.nbinomial.0}, \code{zeroinflated.nbinomial.1}, \code{zeroinflated.nbinomial.2}. Exponentiated random marginals represent odds ratios for models with one of the followinglikelihoods: \code{binomial}, \code{zeroinflated.binomial.0}, \code{zeroinflated.binomial.1}.
-}
 \examples{
 head(spn)
 mod1 <- inla(aan ~ f(id, model = 'bym', graph = sp.adj),

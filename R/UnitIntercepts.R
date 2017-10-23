@@ -5,7 +5,6 @@
 #' @param expo logical. If \code{TRUE} (default), summary statistics are expoentiated.
 #' @param rnd integer indicating the number of decimal places (round) or significant digits (signif) to be used.
 #' @return \code{\link{matrix}} with as many rows as areas and as many columns as models. Exponentiated values represent the posterior mean of unit-specific relative risks (odds ratio), compared to the mean relative risk (odds ratio). 
-#' @details \code{\link{RandomEffects}} return the unit-specific effects relative to the fixed effect; thus, exponentiated random intercepts represent the relative risk (odds ratio) of each unit, relative to the mean relative risk. \code{UnitIntercepts} return the fixed intercept plus the unit-specific random intercepts; thus, exponentiated specific effects represent the relative risk (odds ratio) of each unit. Exponentiated specific marginals represent relative risks for models with one of the following likelihoods: \code{poisson}, \code{zeroinflated.poisson.0}, \code{zeroinflated.poisson.1}, \code{zeroinflated.poisson.2}, \code{nbinomial}, \code{zeroinflated.nbinomial.0}, \code{zeroinflated.nbinomial.1}, \code{zeroinflated.nbinomial.2}. Exponentiated random marginals represent odds ratios for models with one of the followinglikelihoods: \code{binomial}, \code{zeroinflated.binomial.0}, \code{zeroinflated.binomial.1}.
 #' @references Blangiardo, Marta, and Michela Cameletti. Spatial and Spatio-temporal Bayesian Models with R-INLA. John Wiley & Sons, 2015.
 #' @export
 #' @examples 
@@ -50,7 +49,7 @@ UnitIntercepts <- function(..., ran_marg = NULL, expo = TRUE, rnd = 3) {
     nms <- unlist(strsplit(unlist(substr(nms, 6, nchar(nms)-1)), ", "))
   }
   if (expo) {
-    ses <- sapply(mods,
+    use <- sapply(mods,
                   function(x) {
                     if (!is.null(ran_marg)) {
                       re <- RandomEffects(x, expo = TRUE)[[ran_marg]] 
@@ -60,7 +59,7 @@ UnitIntercepts <- function(..., ran_marg = NULL, expo = TRUE, rnd = 3) {
                     re * FixedEffects(x, expo = TRUE)[1, "mean"]
                   })
   } else {
-    ses <- sapply(mods,
+    use <- sapply(mods,
                   function(x) {
                     if (!is.null(ran_marg)) {
                       re <- RandomEffects(x, expo = FALSE)[[ran_marg]] 
@@ -70,6 +69,19 @@ UnitIntercepts <- function(..., ran_marg = NULL, expo = TRUE, rnd = 3) {
                     re + FixedEffects(x, expo = FALSE)[1, "mean"]
                   })
   }
-  #names(ses) <- nms
-  sapply(ses, function(x) x)
+  use_nms <- sapply(mods, function(x) names(x$summary.random))
+  if (length(mods) > 1) {
+      use_nms <- unlist(mapply(function(x, y) paste0(x, "_", 
+                                                    y), nms, use_nms))
+  }
+  if (length(mods) == 1) {
+      use <- c(unlist(use))
+      return(round(use, rnd))
+  }
+  if (sum(diff(sapply(use, length))) == 0) {
+      use <- as.data.frame(use)
+      names(use) <- use_nms
+      return(use)
+  }
+  use
 }

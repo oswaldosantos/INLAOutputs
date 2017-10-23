@@ -7,7 +7,6 @@
 #' @param expo logical. If \code{TRUE} (default), summary statistics are expoentiated.
 #' @param rnd integer indicating the number of decimal places (round) or significant digits (signif) to be used.
 #' @return \code{\link{matrix}} with summary statistics for relative risks or odds ratios.
-#' @details Exponentiated fixed marginals represent relative risks for models with one of the following likelihoods: \code{poisson}, \code{zeroinflated.poisson.0}, \code{zeroinflated.poisson.1}, \code{zeroinflated.poisson.2}, \code{nbinomial}, \code{zeroinflated.nbinomial.0}, \code{zeroinflated.nbinomial.1}, \code{zeroinflated.nbinomial.2}. Exponentiated random marginals represent odds ratios for models with one of the followinglikelihoods: \code{binomial}, \code{zeroinflated.binomial.0}, \code{zeroinflated.binomial.1}.
 #' @references Blangiardo, Marta, and Michela Cameletti. Spatial and Spatio-temporal Bayesian Models with R-INLA. John Wiley & Sons, 2015.
 #' @export
 #' @examples
