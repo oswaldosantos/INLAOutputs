@@ -2,12 +2,12 @@
 
 export(CPO)
 export(DIC)
+export(ExplainedVariance)
 export(FixedEffects)
 export(PredPValue)
 export(RMSE)
 export(RandomEffects)
 export(RandomEffectsExcess)
 export(UnitIntercepts)
-export(VarSpatiallyExplained)
 export(WAIC)
 import(INLA)

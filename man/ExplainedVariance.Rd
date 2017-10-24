@@ -19,6 +19,9 @@ ExplainedVariance(..., n = 10000, rnd = 3)
 \description{
 Proportion of variance explained by each variance component.
 }
+\details{
+The argument \code{scale.model} must be TRUE within \code{f} function.
+}
 \examples{
 data(sp)
 

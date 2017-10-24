@@ -4,7 +4,7 @@
 #' @param n number of random values generated from hyperparameters.
 #' @param rnd integer indicating the number of decimal places to be used.
 #' @return \code{\link{data.frame}} with the proportion of variance explained by each variance component.
-#' @details The argument \code{scale.model} must be TRUE within \{f} function.
+#' @details The argument \code{scale.model} must be TRUE within \code{f} function.
 #' @references Blangiardo, Marta, and Michela Cameletti. Spatial and Spatio-temporal Bayesian Models with R-INLA. John Wiley & Sons, 2015.
 #' @export
 #' @examples 
