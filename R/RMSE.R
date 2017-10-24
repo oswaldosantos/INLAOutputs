@@ -1,8 +1,10 @@
 #' Root mean square error
 #' @description Calculates the RMSE of INLA models.
 #' @param ... objects of \code{\link{class}} \code{inla}  with computed fitted marginals.
+#' @param observed \code{\link{vector}} with observed values. This argument must be specified by its name (see example).
 #' @param decreasing logical. If \code{FALSE} (default), DIC's are displayed in increasing order.
-#' @return na.rm \code{\link{logical}} if \code{FALSE}, NA's are note removed.
+#' @param na.rm \code{\link{logical}} if \code{FALSE}, NA's are note removed.
+#' @return \code{\link{vector}} with RMSE for each model.
 #' @export
 #' @examples 
 #' data(sp)
@@ -14,7 +16,7 @@
 #' mod2 <- inla(aan ~ shvn + f(id, model = 'bym', graph = sp.adj),
 #'              family = 'poisson', data = spn, E = eaan,
 #'              control.predictor=list(link = 1, compute = TRUE))
-#'
+#' RMSE(mod1, mod2, observed = spn$aan / spn$eaan)
 RMSE <- function(..., observed = NULL, decreasing = FALSE, na.rm = FALSE) {
     mods <- list(...)
     nms <- deparse(substitute(list(...)))

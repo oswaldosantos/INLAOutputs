@@ -9,10 +9,14 @@ RMSE(..., observed = NULL, decreasing = FALSE, na.rm = FALSE)
 \arguments{
 \item{...}{objects of \code{\link{class}} \code{inla}  with computed fitted marginals.}
 
+\item{observed}{\code{\link{vector}} with observed values. This argument must be specified by its name (see example).}
+
 \item{decreasing}{logical. If \code{FALSE} (default), DIC's are displayed in increasing order.}
+
+\item{na.rm}{\code{\link{logical}} if \code{FALSE}, NA's are note removed.}
 }
 \value{
-na.rm \code{\link{logical}} if \code{FALSE}, NA's are note removed.
+\code{\link{vector}} with RMSE for each model.
 }
 \description{
 Calculates the RMSE of INLA models.
@@ -27,5 +31,5 @@ mod1 <- inla(aan ~ f(id, model = 'bym', graph = sp.adj),
 mod2 <- inla(aan ~ shvn + f(id, model = 'bym', graph = sp.adj),
              family = 'poisson', data = spn, E = eaan,
              control.predictor=list(link = 1, compute = TRUE))
-
+RMSE(mod1, mod2, observed = spn$aan / spn$eaan)
 }
