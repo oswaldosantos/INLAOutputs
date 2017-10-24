@@ -2,7 +2,7 @@
 #' @description @description Probability of random effects being in excess.
 #' @param ... object of \code{\link{class}} \code{inla} with outputs from a BYM model.
 #' @param cutoff value above which random effects would be in excess. The cutoff is ued for untransformed marginal posteriors, so \code{cutoff = 0} (default) is used to calculate the probability of relative risk (odds ratio) > 1.
-#' @param rnd integer indicating the number of decimal places (round) or significant digits (signif) to be used.
+#' @param rnd integer indicating the number of decimal places to be used.
 #' @return \code{\link{vector}} if only one model with one random effect is evaluated; \code{\link{data.frame}} or \code{\link{list}} otherwise.
 #' @references Blangiardo, Marta, and Michela Cameletti. Spatial and Spatio-temporal Bayesian Models with R-INLA. John Wiley & Sons, 2015.
 #' @export

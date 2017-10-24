@@ -5,7 +5,7 @@
 #' @param hpd. Proportion of the distribution included in the highest density interval. 
 #' @param sd logical. If \code{FALSE} (default), the standard deviation is not returned.
 #' @param expo logical. If \code{TRUE} (default), summary statistics are expoentiated.
-#' @param rnd integer indicating the number of decimal places (round) or significant digits (signif) to be used.
+#' @param rnd integer indicating the number of decimal places to be used.
 #' @return \code{\link{matrix}} with summary statistics.
 #' @references Blangiardo, Marta, and Michela Cameletti. Spatial and Spatio-temporal Bayesian Models with R-INLA. John Wiley & Sons, 2015.
 #' @export

@@ -3,7 +3,7 @@
 #' @param ... objects of \code{\link{class}} \code{inla} in random marginals.
 #' @param ran_marg when objects passed to \code{...} have more than one random marginal and all have a common random marginal with the same ID, this ID can be specified as a string. \code{ran_marg} can be ignored for objects with only one random marginal.
 #' @param expo logical. If \code{TRUE} (default), summary statistics are expoentiated.
-#' @param rnd integer indicating the number of decimal places (round) or significant digits (signif) to be used.
+#' @param rnd integer indicating the number of decimal places to be used.
 #' @return \code{\link{vector}} if only one model with one random effect is evaluated; \code{\link{data.frame}} or \code{\link{list}} otherwise. 
 #' @references Blangiardo, Marta, and Michela Cameletti. Spatial and Spatio-temporal Bayesian Models with R-INLA. John Wiley & Sons, 2015.
 #' @export

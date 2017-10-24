@@ -3,6 +3,7 @@
 #' @param ... objects of \code{\link{class}} \code{inla}  with computed DIC.
 #' @param decreasing logical. If \code{FALSE} (default), DIC's are displayed in increasing order.
 #' @return \code{\link{matrix}} with models' DIC, mean deviance and effective number of paramenters.
+#' @details \code{control.compute = list(dic = TRUE)} must be used within \code{inla} function.
 #' @references Blangiardo, M., Cameletti, M., Baio, G., & Rue, H. (2013). Spatial and spatio-temporal models with R-INLA. Spatial and spatio-temporal epidemiology, 7, 39-55.
 #' @export
 #' @examples 

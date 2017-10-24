@@ -11,7 +11,7 @@ RandomEffects(..., expo = TRUE, rnd = 3)
 
 \item{expo}{logical. If \code{TRUE} (default), summary statistics are expoentiated.}
 
-\item{rnd}{integer indicating the number of decimal places (round) or significant digits (signif) to be used.}
+\item{rnd}{integer indicating the number of decimal places to be used.}
 }
 \value{
 \code{\link{vector}} if only one model with one random effect is evaluated; \code{\link{data.frame}} or \code{\link{list}} otherwise.

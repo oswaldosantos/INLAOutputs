@@ -19,6 +19,9 @@ CPO(..., failure_cutoff = 0, decreasing = TRUE)
 \description{
 Sort and display the sum of the log of CPO's of INLA models.
 }
+\details{
+\code{control.compute = list(cpo = TRUE)} must be used within \code{inla} function.
+}
 \examples{
 data(sp)
 

@@ -16,7 +16,7 @@ FixedEffects(model = NULL, quantiles = c(0.025, 0.975), hpd = 0.95,
 
 \item{expo}{logical. If \code{TRUE} (default), summary statistics are expoentiated.}
 
-\item{rnd}{integer indicating the number of decimal places (round) or significant digits (signif) to be used.}
+\item{rnd}{integer indicating the number of decimal places to be used.}
 
 \item{hpd.}{Proportion of the distribution included in the highest density interval.}
 }

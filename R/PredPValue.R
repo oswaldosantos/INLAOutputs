@@ -5,6 +5,7 @@
 #' @param cutoff \code{\link{vector}} with lower and upper values to define the tails of the p-values cumulative distribution. Default: c(0.1, 0.9).
 #' @param decreasing logical. If \code{FALSE} (default), models are displayed in increasing order, according to the proportion of values in both tails (the first model has the best fit).
 #' @return \code{\link{list}}. The first element contains the proportion of p-values in the lower and upper tails. The second element contains the p-values.
+#' @details \code{control.predictor = list(link = 1, compute = TRUE)} must be used within \code{inla} function.
 #' @references Blangiardo, Marta, and Michela Cameletti. Spatial and Spatio-temporal Bayesian Models with R-INLA. John Wiley & Sons, 2015.
 #' @export
 #' @examples 
@@ -12,7 +13,7 @@
 #' 
 #' mod <- inla(aan ~ f(id, model = 'bym', graph = sp.adj),
 #'              family = 'poisson', data = spn, E= eaan,
-#'              control.predictor=list(link = 1, compute = TRUE))
+#'              control.predictor = list(link = 1, compute = TRUE))
 #'
 #' PredPValue(mod, observed = spn$aan)
 PredPValue <- function(..., observed = NULL, cutoff = c(0.1, 0.9), decreasing = FALSE) {

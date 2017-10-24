@@ -2,7 +2,7 @@
 #' @description Alternative display of computed random marginals.
 #' @param ... objects of \code{\link{class}} \code{inla} with random marginals. Only provide more than one object if the number of aggregation units is the same for all random marginals sets among all models (i.e. when the random model (iid, BYM, etc.) is the same for all objects).
 #' @param expo logical. If \code{TRUE} (default), summary statistics are expoentiated.
-#' @param rnd integer indicating the number of decimal places (round) or significant digits (signif) to be used.
+#' @param rnd integer indicating the number of decimal places to be used.
 #' @return \code{\link{vector}} if only one model with one random effect is evaluated; \code{\link{data.frame}} or \code{\link{list}} otherwise.
 #' @references Blangiardo, Marta, and Michela Cameletti. Spatial and Spatio-temporal Bayesian Models with R-INLA. John Wiley & Sons, 2015.
 #' @export
@@ -14,8 +14,7 @@
 #'              family = 'poisson', data = spn)
 #' summary(RandomEffects(mod1))
 #' 
-RandomEffects <- function (..., expo = TRUE, rnd = 3) 
-{
+RandomEffects <- function (..., expo = TRUE, rnd = 3) {
     mods <- list(...)
     nms <- deparse(substitute(list(...)))
     if (any(grepl("list\\(", nms))) {

@@ -17,6 +17,9 @@ DIC(..., decreasing = FALSE)
 \description{
 Sort and display the Deviance information criteria of INLA models.
 }
+\details{
+\code{control.compute = list(dic = TRUE)} must be used within \code{inla} function.
+}
 \examples{
 data(sp)
 

@@ -21,12 +21,15 @@ PredPValue(..., observed = NULL, cutoff = c(0.1, 0.9), decreasing = FALSE)
 \description{
 Computes de probability Pr(predicted_i <= observed_i | observed).
 }
+\details{
+\code{control.predictor = list(link = 1, compute = TRUE)} must be used within \code{inla} function.
+}
 \examples{
 data(sp)
 
 mod <- inla(aan ~ f(id, model = 'bym', graph = sp.adj),
              family = 'poisson', data = spn, E= eaan,
-             control.predictor=list(link = 1, compute = TRUE))
+             control.predictor = list(link = 1, compute = TRUE))
 
 PredPValue(mod, observed = spn$aan)
 }

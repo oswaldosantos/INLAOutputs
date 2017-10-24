@@ -17,6 +17,9 @@ WAIC(..., decreasing = FALSE)
 \description{
 Sort and display the Watanabe-Akaike information criteria of INLA models.
 }
+\details{
+\code{control.compute = list(waic = TRUE)} must be used within \code{inla} function.
+}
 \examples{
 data(sp)
 

@@ -3,6 +3,7 @@
 #' @param ... objects of \code{\link{class}} \code{inla}  with computed WAIC.
 #' @param decreasing logical. If \code{FALSE} (default), WAIC's are displayed in increasing order.
 #' @return \code{\link{matrix}} with models' WAIC.
+#' @details \code{control.compute = list(waic = TRUE)} must be used within \code{inla} function.
 #' @references Gelman, Andrew, Jessica Hwang, and Aki Vehtari. "Understanding predictive information criteria for Bayesian models." Statistics and Computing 24.6 (2014): 997-1016.
 #' @export
 #' @examples 
