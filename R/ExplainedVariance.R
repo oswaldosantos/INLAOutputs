@@ -32,7 +32,9 @@ ExplainedVariance <- function(..., n = 1e4, rnd = 3) {
     for (i in 1:length(mods)) {
         hyper_sample <- inla.hyperpar.sample(n, mods[[i]])
         ran_names <- names(mods[[i]]$summary.random)
-        idx <- grepl(ran_names, colnames(hyper_sample))
+        idx <- apply(sapply(ran_names,
+                            function(x) grepl(x, colnames(hyper_sample))), 2,
+                     function(x) any(x))
         hyper_sample <- hyper_sample[, idx]
         hs2 <- c()
         for (j in 1:ncol(hyper_sample)) {
