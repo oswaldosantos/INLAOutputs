@@ -4,7 +4,7 @@
 \alias{RMSE}
 \title{Root mean square error}
 \usage{
-RMSE(..., observed = NULL, decreasing = FALSE, na.rm = FALSE)
+RMSE(..., observed = NULL, decreasing = FALSE, na.rm = FALSE, rnd = 3)
 }
 \arguments{
 \item{...}{objects of \code{\link{class}} \code{inla}  with computed fitted marginals.}
@@ -14,6 +14,8 @@ RMSE(..., observed = NULL, decreasing = FALSE, na.rm = FALSE)
 \item{decreasing}{logical. If \code{FALSE} (default), DIC's are displayed in increasing order.}
 
 \item{na.rm}{\code{\link{logical}} if \code{FALSE}, NA's are note removed.}
+
+\item{rnd}{integer indicating the number of decimal places to be used.}
 }
 \value{
 \code{\link{vector}} with RMSE for each model.

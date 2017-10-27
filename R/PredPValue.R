@@ -4,6 +4,7 @@
 #' @param observed \code{\link{vector}} with observed values. This argument must be specified by its name (see example).
 #' @param cutoff \code{\link{vector}} with lower and upper values to define the tails of the p-values cumulative distribution. Default: c(0.1, 0.9).
 #' @param decreasing logical. If \code{FALSE} (default), models are displayed in increasing order, according to the proportion of values in both tails (the first model has the best fit).
+#' @param rnd integer indicating the number of decimal places to be used.
 #' @return \code{\link{list}}. The first element contains the proportion of p-values in the lower and upper tails. The second element contains the p-values.
 #' @details \code{control.predictor = list(link = 1, compute = TRUE)} must be used within \code{inla} function.
 #' @references Blangiardo, Marta, and Michela Cameletti. Spatial and Spatio-temporal Bayesian Models with R-INLA. John Wiley & Sons, 2015.
@@ -17,7 +18,7 @@
 #'
 #' p_vals <- PredPValue(mod, observed = spn$aan)
 #' p_vals$p_tails
-PredPValue <- function(..., observed = NULL, cutoff = c(0.1, 0.9), decreasing = FALSE) {
+PredPValue <- function(..., observed = NULL, cutoff = c(0.1, 0.9), decreasing = FALSE, rnd = 3) {
     mods <- list(...)
     nms <- deparse(substitute(list(...)))
     if (any(grepl("list\\(", nms))) {
@@ -35,7 +36,7 @@ PredPValue <- function(..., observed = NULL, cutoff = c(0.1, 0.9), decreasing = 
                 q = observed[i2],
                 marginal = mods[[i]]$marginals.fitted.values[[i2]])
         }
-        p_tails[i, ] <- round(c(sum(p <= .1)/ n, sum(p >= .9)/ n), 4)
+        p_tails[i, ] <- round(c(sum(p <= .1)/ n, sum(p >= .9)/ n), rnd)
         ps[[i]] <- p
     }
     if (length(mods) > 1) {

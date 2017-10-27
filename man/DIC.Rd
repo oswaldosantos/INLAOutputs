@@ -4,12 +4,14 @@
 \alias{DIC}
 \title{Deviance information criteria}
 \usage{
-DIC(..., decreasing = FALSE)
+DIC(..., decreasing = FALSE, rnd = 3)
 }
 \arguments{
 \item{...}{objects of \code{\link{class}} \code{inla}  with computed DIC.}
 
 \item{decreasing}{logical. If \code{FALSE} (default), DIC's are displayed in increasing order.}
+
+\item{rnd}{integer indicating the number of decimal places to be used.}
 }
 \value{
 \code{\link{matrix}} with models' DIC, mean deviance and effective number of paramenters.

@@ -3,6 +3,7 @@
 #' @param ... objects of \code{\link{class}} \code{inla}  with computed fitted marginals.
 #' @param observed \code{\link{vector}} with observed values. This argument must be specified by its name (see example).
 #' @param decreasing logical. If \code{FALSE} (default), DIC's are displayed in increasing order.
+#' @param rnd integer indicating the number of decimal places to be used.
 #' @param na.rm \code{\link{logical}} if \code{FALSE}, NA's are note removed.
 #' @return \code{\link{vector}} with RMSE for each model.
 #' @export
@@ -17,7 +18,7 @@
 #'              family = 'poisson', data = spn, E = eaan,
 #'              control.predictor=list(link = 1, compute = TRUE))
 #' RMSE(mod1, mod2, observed = spn$aan / spn$eaan)
-RMSE <- function(..., observed = NULL, decreasing = FALSE, na.rm = FALSE) {
+RMSE <- function(..., observed = NULL, decreasing = FALSE, na.rm = FALSE, rnd = 3) {
     mods <- list(...)
     nms <- deparse(substitute(list(...)))
     if (any(grepl("list\\(", nms))) {
@@ -28,5 +29,5 @@ RMSE <- function(..., observed = NULL, decreasing = FALSE, na.rm = FALSE) {
                                               observed)^2, na.rm = na.rm)))
     names(rmse) <- nms
     rmse <- sort(rmse, decreasing = decreasing)
-    rmse
+    round(rmse, 3)
 }

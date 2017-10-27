@@ -4,7 +4,8 @@
 \alias{PredPValue}
 \title{Posterior predictive p-value}
 \usage{
-PredPValue(..., observed = NULL, cutoff = c(0.1, 0.9), decreasing = FALSE)
+PredPValue(..., observed = NULL, cutoff = c(0.1, 0.9), decreasing = FALSE,
+  rnd = 3)
 }
 \arguments{
 \item{...}{objects of \code{\link{class}} \code{inla} with computed fitted marginals.}
@@ -14,6 +15,8 @@ PredPValue(..., observed = NULL, cutoff = c(0.1, 0.9), decreasing = FALSE)
 \item{cutoff}{\code{\link{vector}} with lower and upper values to define the tails of the p-values cumulative distribution. Default: c(0.1, 0.9).}
 
 \item{decreasing}{logical. If \code{FALSE} (default), models are displayed in increasing order, according to the proportion of values in both tails (the first model has the best fit).}
+
+\item{rnd}{integer indicating the number of decimal places to be used.}
 }
 \value{
 \code{\link{list}}. The first element contains the proportion of p-values in the lower and upper tails. The second element contains the p-values.

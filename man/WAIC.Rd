@@ -4,12 +4,14 @@
 \alias{WAIC}
 \title{Watanabe-Akaike information criteria}
 \usage{
-WAIC(..., decreasing = FALSE)
+WAIC(..., decreasing = FALSE, rnd = 3)
 }
 \arguments{
 \item{...}{objects of \code{\link{class}} \code{inla}  with computed WAIC.}
 
 \item{decreasing}{logical. If \code{FALSE} (default), WAIC's are displayed in increasing order.}
+
+\item{rnd}{integer indicating the number of decimal places to be used.}
 }
 \value{
 \code{\link{matrix}} with models' WAIC.

@@ -4,7 +4,7 @@
 \alias{CPO}
 \title{Conditional predictive ordinates}
 \usage{
-CPO(..., failure_cutoff = 0, decreasing = TRUE)
+CPO(..., failure_cutoff = 0, decreasing = TRUE, rnd = 3)
 }
 \arguments{
 \item{...}{models of \code{\link{class}} \code{inla} with computed CPO's.}
@@ -12,6 +12,8 @@ CPO(..., failure_cutoff = 0, decreasing = TRUE)
 \item{failure_cutoff}{value between 0 and 1. CPO's with a failure score greater than \code{failure_cutoff} are considered unreliable and are ignored.}
 
 \item{decreasing}{logical. If \code{TRUE} (default), CPO's are displayed in decreasing order (higher values indicate better prediction).}
+
+\item{rnd}{integer indicating the number of decimal places to be used.}
 }
 \value{
 \code{\link{matrix}} with the sum of the log of CPO's and the proportion of failures of each models' CPO.
