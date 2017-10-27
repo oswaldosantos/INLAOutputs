@@ -1,3 +1,10 @@
+1.2.5
+=====
+
+* ExplainedVariance: comparisons restricted to random marginals.
+
+* CPO, DIC, WAIC, PredPValues: rounding argument.
+
 1.2.4
 =====
 

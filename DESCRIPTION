@@ -15,8 +15,8 @@ LazyLoad: yes
 URL: https://github.com/oswaldosantos/INLAOutputs
 Authors@R: c(person(given='Oswaldo', family='Santos Baquero',
     email='baquero@usp.br', role=c("aut", "cre")))
-Version: 1.2.4
-Date: 2017-10-24
+Version: 1.2.5
+Date: 2017-10-27
 NeedsCompilation: no
 Author: Oswaldo Santos Baquero [aut, cre]
 Maintainer: Oswaldo Santos Baquero <baquero@usp.br>
