@@ -47,6 +47,7 @@ summary(mod1$summary.random[[1]][, 2] +
 
 # SMR for comparison
 summary(spn$aan / spn$eaan)
+summary(UnitIntercepts(mod1) * RandomEffects(mod1))
 summary(UnitIntercepts(mod1))
 summary(RandomEffects(mod1) * FixedEffects(mod1)[1, "mean"])
 
