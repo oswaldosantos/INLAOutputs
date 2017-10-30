@@ -29,5 +29,5 @@ RMSE <- function(..., observed = NULL, decreasing = FALSE, na.rm = FALSE, rnd = 
                                               observed)^2, na.rm = na.rm)))
     names(rmse) <- nms
     rmse <- sort(rmse, decreasing = decreasing)
-    round(rmse, 3)
+    round(rmse, rnd)
 }
