@@ -3,7 +3,7 @@
 #' \tabular{ll}{
 #' Package: \tab INLAOutputs\cr
 #' Type: \tab Package\cr
-#' Version: \tab 1.2.6\cr
+#' Version: \tab 1.2.7\cr
 #' Date: \tab 2017-11-6\cr
 #' Depends: \tab R (>= 3.4.1), INLA\cr
 #' License: \tab GPL (>= 2)\cr
