@@ -2,12 +2,12 @@
 % Please edit documentation in R/RandomEffectsExcess.R
 \name{RandomEffectsExcess}
 \alias{RandomEffectsExcess}
-\title{Spatial effects in excess}
+\title{Rnadom effects in excess}
 \usage{
 RandomEffectsExcess(..., cutoff = 0, rnd = 3)
 }
 \arguments{
-\item{...}{object of \code{\link{class}} \code{inla} with outputs from a BYM model.}
+\item{...}{object of \code{\link{class}} \code{inla} with random marginals.}
 
 \item{cutoff}{value above which random effects would be in excess. The cutoff is ued for untransformed marginal posteriors, so \code{cutoff = 0} (default) is used to calculate the probability of relative risk (odds ratio) > 1.}
 
@@ -17,7 +17,7 @@ RandomEffectsExcess(..., cutoff = 0, rnd = 3)
 \code{\link{vector}} if only one model with one random effect is evaluated; \code{\link{data.frame}} or \code{\link{list}} otherwise.
 }
 \description{
-@description Probability of random effects being in excess.
+@description Probability of random effects being higher than a cutoff value.
 }
 \examples{
 data(sp)
@@ -30,7 +30,7 @@ mod2 <- inla(aan ~ shvn + f(id, model = 'bym', graph = sp.adj),
              E = eaan,
              family = 'poisson', data = spn)
 
-see <- RandomEffectsExcess(mod1, mod2, cutoff = .8)
+see <- RandomEffectsExcess(mod1, mod2)
 summary(see)
 }
 \references{
