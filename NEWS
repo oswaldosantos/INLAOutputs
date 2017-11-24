@@ -1,3 +1,11 @@
+1.2.8
+=====
+
+* RandomEffects and RandomEffectsExcess: support for BYM2 models.
+
+* FixedEffects: hpd is NULL by default.
+
+
 1.2.7
 =====
 
