@@ -32,7 +32,8 @@ RandomEffectsExcess <- function (..., cutoff = 0, rnd = 3)
         res2 <- list()
         for (j in 1:length(mods[[i]]$marginals.random)) {
             tmp <- mods[[i]]$marginals.random[[j]]
-            if (mods[[i]]$model.random[j] == "BYM model") {
+            if (mods[[i]]$model.random[j] == "BYM model" |
+                mods[[i]]$model.random[j] == "BYM2 model") {
                 res2[[j]] <- unname(unlist(sapply(tmp[1:(length(tmp)/2)], 
                                                   function(x) {
                                                       1 - inla.pmarginal(cutoff, x)
