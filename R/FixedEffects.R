@@ -14,26 +14,41 @@
 #' mod <- inla(aan ~ shvn + f(id, model = 'bym', graph = sp.adj),
 #'             E = eaan, family = 'poisson', data = spn)
 #' FixedEffects(mod)
-FixedEffects <- function(model = NULL, quantiles = c(.025, .975), hpd = 0.95, sd = FALSE, expo = TRUE, rnd = 3) {
+#' FixedEffects(mod, quantiles = NULL, hpd = .95)
+FixedEffects <- function(model = NULL, quantiles = c(.025, .975), hpd = NULL, sd = FALSE, expo = TRUE, rnd = 3) {
     if (expo) {
         margs <- lapply(model$marginals.fixed,
-                            function(x) inla.tmarginal(exp, x))
+                        function(x) inla.tmarginal(exp, x))
         mean <- sapply(model$marginals.fixed, function(x) inla.emarginal(exp, x))
     } else {
         margs <- model$marginals.fixed
         mean <- model$summary.fixed[, 1]
     }
-    qts <- sapply(margs,
-                  function(x) inla.qmarginal(quantiles, x))
+    if (!is.null(quantiles)) {
+        qts <- sapply(margs,
+                      function(x) inla.qmarginal(quantiles, x))   
+    }
     if (!is.null(hpd)) {
         hpds <- sapply(margs,
                        function(x) inla.hpdmarginal(hpd, x))
     }
-    qts <- rbind(qts, hpds)
-    rownames(qts) <- c(paste0("qt", quantiles),
-                       paste0(c("hpd_ll", "hpd_ul"), hpd))
-    qts <- t(qts)
-    res <- cbind(mean, qts)
+    if (!is.null(quantiles) & !is.null(hpd)) {
+        res0 <- rbind(qts, hpds)
+        rownames(res0) <- c(paste0("qt", quantiles),
+                            paste0(c("ll_hpd", "ul_hpd"), hpd))
+        res0 <- t(res0)
+    }
+    if (!is.null(quantiles) & is.null(hpd)) {
+        res0 <- rbind(qts)
+        rownames(res0) <- paste0("qt", quantiles)
+        res0 <- t(res0)
+    }
+    if (is.null(quantiles) & !is.null(hpd)) {
+        res0 <- rbind(hpds)
+        rownames(res0) <- paste0(c("ll_hpd", "ul_hpd"), hpd)
+        res0 <- t(res0)
+    }
+    res <- cbind(mean, res0)
     if (sd) {
         sd <- sapply(margs, function(x) inla.emarginal(sd, x))
         res <- cbind(res, sd)

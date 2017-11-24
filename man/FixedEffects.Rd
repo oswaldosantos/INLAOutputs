@@ -4,7 +4,7 @@
 \alias{FixedEffects}
 \title{Fixed effects}
 \usage{
-FixedEffects(model = NULL, quantiles = c(0.025, 0.975), hpd = 0.95,
+FixedEffects(model = NULL, quantiles = c(0.025, 0.975), hpd = NULL,
   sd = FALSE, expo = TRUE, rnd = 3)
 }
 \arguments{
@@ -31,6 +31,7 @@ data(sp)
 mod <- inla(aan ~ shvn + f(id, model = 'bym', graph = sp.adj),
             E = eaan, family = 'poisson', data = spn)
 FixedEffects(mod)
+FixedEffects(mod, quantiles = NULL, hpd = .95)
 }
 \references{
 Blangiardo, Marta, and Michela Cameletti. Spatial and Spatio-temporal Bayesian Models with R-INLA. John Wiley & Sons, 2015.
