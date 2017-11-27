@@ -26,7 +26,7 @@ RandomEffects <- function (..., expo = TRUE, rnd = 3) {
         res2 <- list()
         for (j in 1:length(mods[[i]]$marginals.random)) {
             if (mods[[i]]$model.random[j] == "BYM model" |
-                mods[[i]]$model.random[j] == "BYM model") {
+                mods[[i]]$model.random[j] == "BYM2 model") {
                 if (!expo) {
                     tmp <- mods[[i]]$summary.random[[j]]$mean
                     res2[[j]] <- unname(unlist(tmp[1:(length(tmp)/2)]))
