@@ -11,7 +11,7 @@ Process selected outputs from the 'INLA' package
 \tabular{ll}{
 Package: \tab INLAOutputs\cr
 Type: \tab Package\cr
-Version: \tab 1.2.9\cr
+Version: \tab 1.4.0\cr
 Date: \tab 2017-12-08\cr
 Depends: \tab R (>= 3.4.1), INLA\cr
 License: \tab GPL (>= 2)\cr
