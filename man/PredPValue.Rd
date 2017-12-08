@@ -4,13 +4,10 @@
 \alias{PredPValue}
 \title{Posterior predictive p-value}
 \usage{
-PredPValue(..., observed = NULL, cutoff = c(0.1, 0.9), decreasing = FALSE,
-  rnd = 3)
+PredPValue(..., cutoff = c(0.1, 0.9), decreasing = FALSE, rnd = 3)
 }
 \arguments{
 \item{...}{objects of \code{\link{class}} \code{inla} with computed fitted marginals.}
-
-\item{observed}{\code{\link{vector}} with observed values. This argument must be specified by its name (see example).}
 
 \item{cutoff}{\code{\link{vector}} with lower and upper values to define the tails of the p-values cumulative distribution. Default: c(0.1, 0.9).}
 
@@ -34,7 +31,7 @@ mod <- inla(aan ~ f(id, model = 'bym', graph = sp.adj),
              family = 'poisson', data = spn, E= eaan,
              control.predictor = list(link = 1, compute = TRUE))
 
-p_vals <- PredPValue(mod, observed = spn$aan)
+p_vals <- PredPValue(mod)
 p_vals$p_tails
 }
 \references{

@@ -28,7 +28,10 @@ DIC <- function(..., decreasing = FALSE, rnd = 3) {
     }
     dics <- t(sapply(mods,
                    function(x) unlist(x$dic[c("dic", "mean.deviance", "p.eff")])))
-    rownames(dics) <- nms
-    apply(dics[order(dics[, 1], decreasing = decreasing), ], 2,
-          function(x) round(x, rnd))
+    if (length(mods) > 1) {
+        rownames(dics) <- nms
+        dics <- apply(dics[order(dics[, 1], decreasing = decreasing), ], 2,
+                      function(x) round(x, rnd))
+    }
+    round(dics, rnd)
 }

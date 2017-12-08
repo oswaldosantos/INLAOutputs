@@ -23,6 +23,9 @@
 #' ExplainedVariance(mod1, mod2)
 ExplainedVariance <- function(..., n = 1e4, rnd = 3) {
     mods <- list(...)
+    if (any(sapply(mods, function(x) any("BYM2 model" %in% x$model.random)))) {
+        stop("For BYM2 models, see the Phi hyperparameter.")
+    }
     nms <- deparse(substitute(list(...)))
     if (any(grepl("list\\(", nms))) {
         nms <- unlist(strsplit(unlist(substr(nms, 6, nchar(nms) - 

@@ -32,7 +32,10 @@ CPO <- function(..., failure_cutoff = 0, decreasing = TRUE, rnd = 3) {
                          idx <- x$cpo$failure <= failure_cutoff
                          c("sum(log(cpo))" = sum(log(x$cpo$cpo[idx])),
                            "failures" = 1 - mean(idx))}))
-    rownames(cpos) <- nms
-    apply(cpos[order(cpos[, 1], decreasing = decreasing), ], 2,
-          function(x) round(x, rnd))
+    if (length(mods) > 1) {
+        rownames(cpos) <- nms
+        cpos <- apply(cpos[order(cpos[, 1], decreasing = decreasing), ], 2,
+              function(x) round(x, rnd))
+    }
+    round(cpos, rnd)
 }

@@ -2,18 +2,14 @@
 % Please edit documentation in R/RMSE.R
 \name{RMSE}
 \alias{RMSE}
-\title{Root mean square error}
+\title{Root mean squared error}
 \usage{
-RMSE(..., observed = NULL, decreasing = FALSE, na.rm = FALSE, rnd = 3)
+RMSE(..., observed = NULL, decreasing = FALSE, rnd = 3)
 }
 \arguments{
 \item{...}{objects of \code{\link{class}} \code{inla}  with computed fitted marginals.}
 
-\item{observed}{\code{\link{vector}} with observed values. This argument must be specified by its name (see example).}
-
-\item{decreasing}{logical. If \code{FALSE} (default), DIC's are displayed in increasing order.}
-
-\item{na.rm}{\code{\link{logical}} if \code{FALSE}, NA's are note removed.}
+\item{decreasing}{logical. If \code{FALSE} (default), RMSE's are displayed in increasing order.}
 
 \item{rnd}{integer indicating the number of decimal places to be used.}
 }

@@ -28,7 +28,10 @@ WAIC <- function(..., decreasing = FALSE, rnd = 3) {
     }
     waics <- t(sapply(mods,
                      function(x) unlist(x$waic[c("waic", "p.eff")])))
+    if (length(mods) > 1) {
     rownames(waics) <- nms
-    apply(waics[order(waics[, 1], decreasing = decreasing), ], 2,
+    waics <- apply(waics[order(waics[, 1], decreasing = decreasing), ], 2,
           function(x) round(x, rnd))
+    }
+    round(waics, rnd)
 }

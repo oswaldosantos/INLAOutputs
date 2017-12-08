@@ -1,7 +1,6 @@
 #' Posterior predictive p-value
 #' @description Computes de probability Pr(predicted_i <= observed_i | observed).
 #' @param ... objects of \code{\link{class}} \code{inla} with computed fitted marginals.
-#' @param observed \code{\link{vector}} with observed values. This argument must be specified by its name (see example).
 #' @param cutoff \code{\link{vector}} with lower and upper values to define the tails of the p-values cumulative distribution. Default: c(0.1, 0.9).
 #' @param decreasing logical. If \code{FALSE} (default), models are displayed in increasing order, according to the proportion of values in both tails (the first model has the best fit).
 #' @param rnd integer indicating the number of decimal places to be used.
@@ -16,9 +15,9 @@
 #'              family = 'poisson', data = spn, E= eaan,
 #'              control.predictor = list(link = 1, compute = TRUE))
 #'
-#' p_vals <- PredPValue(mod, observed = spn$aan)
+#' p_vals <- PredPValue(mod)
 #' p_vals$p_tails
-PredPValue <- function(..., observed = NULL, cutoff = c(0.1, 0.9), decreasing = FALSE, rnd = 3) {
+PredPValue <- function(..., cutoff = c(0.1, 0.9), decreasing = FALSE, rnd = 3) {
     mods <- list(...)
     nms <- deparse(substitute(list(...)))
     if (any(grepl("list\\(", nms))) {
@@ -29,11 +28,31 @@ PredPValue <- function(..., observed = NULL, cutoff = c(0.1, 0.9), decreasing = 
     colnames(p_tails) <- c(paste("lower", cutoff[1]),
                            paste("upper", cutoff[2]))
     for (i in 1:length(mods)) {
+        
+        call <- gsub("\\s+", " ", paste(mods[[i]]$call, collapse = ""))
+        data_rex <- regexpr("data = [[:alnum:]|[:punct:]]+,", call)
+        data_string <- substring(call,
+                                 data_rex + 7,
+                                 data_rex + attributes(data_rex)[[1]] - 2)
+        y_rex <- regexpr("formula = [[:alnum:]|[:punct:]]+ ", call)
+        y_string <- substring(call,
+                              y_rex + 10,
+                              y_rex + attributes(y_rex)[[1]] - 2)
+        
+        e_rex <- regexpr("E = [[:alnum:]|[:punct:]]+,", call)
+        e_string <- substring(call,
+                              e_rex + 4,
+                              e_rex + attributes(e_rex)[[1]] - 2)
+        dat <- eval(parse(text = data_string))
+        y <- dat[, y_string]
+        if (!is.null(e_string)) {
+            y <- y / dat[, y_string]
+        }
         n <- length(mods[[i]]$marginals.fitted.values)
         p <- c()
         for(i2 in 1:n) {
             p[i2] <- inla.pmarginal(
-                q = observed[i2],
+                q = y[i2],
                 marginal = mods[[i]]$marginals.fitted.values[[i2]])
         }
         p_tails[i, ] <- round(c(sum(p <= .1)/ n, sum(p >= .9)/ n), rnd)
