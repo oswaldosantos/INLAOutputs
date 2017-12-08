@@ -41,7 +41,7 @@ RMSE <- function(..., observed = NULL, decreasing = FALSE, rnd = 3) {
         dat <- eval(parse(text = data_string))
         y <- dat[, y_string]
         if (!is.null(e_string)) {
-            y <- y / dat[, y_string]
+            y <- y / dat[, e_string]
         }
         y_pred <- mods[[i]]$summary.fitted.values$mean
         rmse <- c(rmse, sqrt(mean((y_pred - y)^2)))

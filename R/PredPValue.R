@@ -46,7 +46,7 @@ PredPValue <- function(..., cutoff = c(0.1, 0.9), decreasing = FALSE, rnd = 3) {
         dat <- eval(parse(text = data_string))
         y <- dat[, y_string]
         if (!is.null(e_string)) {
-            y <- y / dat[, y_string]
+            y <- y / dat[, e_string]
         }
         n <- length(mods[[i]]$marginals.fitted.values)
         p <- c()
