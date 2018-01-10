@@ -4,7 +4,7 @@
 \alias{RMSE}
 \title{Root mean squared error}
 \usage{
-RMSE(..., observed = NULL, decreasing = FALSE, rnd = 3)
+RMSE(..., decreasing = FALSE, rnd = 3)
 }
 \arguments{
 \item{...}{objects of \code{\link{class}} \code{inla}  with computed fitted marginals.}

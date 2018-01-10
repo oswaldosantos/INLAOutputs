@@ -16,7 +16,7 @@
 #'              family = 'poisson', data = spn, E = eaan,
 #'              control.predictor=list(link = 1, compute = TRUE))
 #' RMSE(mod1, mod2, observed = spn$aan / spn$eaan)
-RMSE <- function(..., observed = NULL, decreasing = FALSE, rnd = 3) {
+RMSE <- function(..., decreasing = FALSE, rnd = 3) {
     mods <- list(...)
     nms <- deparse(substitute(list(...)))
     if (any(grepl("list\\(", nms))) {
