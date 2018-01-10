@@ -8,11 +8,3 @@ document()
 # Checking
 run_examples()
 check_man()
-
-# News preview
-show_news()
-
-# Update version in:
-#   DESCRIPTION
-#   capm-package
-#   NEWS
