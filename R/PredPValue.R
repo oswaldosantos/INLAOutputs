@@ -43,7 +43,7 @@ PredPValue <- function(..., cutoff = c(0.1, 0.9), decreasing = FALSE, rnd = 3) {
         e_string <- substring(call,
                               e_rex + 4,
                               e_rex + attributes(e_rex)[[1]] - 2)
-        dat <- eval(parse(text = data_string))
+        dat <- as.data.frame(eval(parse(text = data_string)))
         y <- dat[, y_string]
         if (!is.null(e_string)) {
             y <- y / dat[, e_string]
