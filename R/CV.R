@@ -54,7 +54,7 @@ CV <- function(..., k = NULL, test_prop = NULL, test_idx = NULL, rep = 1, seed =
         call_tails <- unlist(strsplit(call, data_call))
         
         data_cv <- eval(parse(text = data_string))
-        y0 <- y <- data_cv[, y_string]
+        y0 <- y <- as.data.frame(data_cv[, y_string])
         if (!is.null(e_string)) {
             y <- y / data_cv[, e_string]
         }
