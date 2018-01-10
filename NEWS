@@ -1,3 +1,10 @@
+1.4.1
+=====
+
+* PredPValue: bug fixed.
+
+* RMSE: remove unused argument.
+
 1.4.0
 =====
 
