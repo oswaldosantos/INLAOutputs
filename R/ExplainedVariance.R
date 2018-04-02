@@ -21,11 +21,8 @@
 #'              family = 'poisson', data = spn)
 #' 
 #' ExplainedVariance(mod1, mod2)
-ExplainedVariance <- function(..., n = 1e4, rnd = 3) {
+ExplainedVariance <- function(..., n = 1e4, rnd = 3) function (..., n = 10000, rnd = 3) {
     mods <- list(...)
-    if (any(sapply(mods, function(x) any("BYM2 model" %in% x$model.random)))) {
-        stop("For BYM2 models, see the Phi hyperparameter.")
-    }
     nms <- deparse(substitute(list(...)))
     if (any(grepl("list\\(", nms))) {
         nms <- unlist(strsplit(unlist(substr(nms, 6, nchar(nms) - 
@@ -36,13 +33,25 @@ ExplainedVariance <- function(..., n = 1e4, rnd = 3) {
         hyper_sample <- inla.hyperpar.sample(n, mods[[i]])
         ran_names <- names(mods[[i]]$summary.random)
         idx <- apply(sapply(ran_names,
-                            function(x) grepl(x, colnames(hyper_sample))), 1,
+                            function(x) grepl(x, colnames(hyper_sample))),
+                     1,
                      function(x) any(x))
         hyper_sample <- hyper_sample[, idx]
+        bym2 <- which("BYM2 model" %in% mods[[i]]$model.random)
+        if (lnegth(bym2) > 0) {
+            phi <- summary(mods[[1]])$hyperpar$mean[bym2 + 1]
+            hyper_sample[, bym2 + 1] <- NA
+        }
         hs2 <- c()
         for (j in 1:ncol(hyper_sample)) {
             hs2 <- c(hs2, mean((1 / hyper_sample[, j]) /
-                                   apply(hyper_sample, 1, function(x) sum(1/x))))
+                                   apply(hyper_sample,
+                                         1,
+                                         function(x) sum(1/x, na.rm = TRUE))))
+        }
+        if (lnegth(bym2) > 0) {
+            hs2[bym2 + 1] <- hs2[bym2] * phi
+            hs2[bym2] <- hs2[bym2] * (1 - phi)
         }
         names(hs2) <- colnames(hyper_sample)
         hs[[i]] <- hs2
@@ -57,5 +66,9 @@ ExplainedVariance <- function(..., n = 1e4, rnd = 3) {
     row.names(hs3) <- NULL
     names(hs3) <- c("variance_component", nms)
     hs3$variance_component <- gsub("Precision for ", "", hs3$variance_component)
+    hs3$variance_component <- gsub("Phi for ", "", hs3$variance_component)
+    hs3$variance_component[bym2] <- paste(hs3$variance_component[bym2], "(iid)")
+    hs3$variance_component[bym2 + 1] <-
+        paste(hs3$variance_component[bym2 + 1], "(Besag)")
     hs3
 }
