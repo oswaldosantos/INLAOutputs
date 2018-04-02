@@ -21,7 +21,7 @@
 #'              family = 'poisson', data = spn)
 #' 
 #' ExplainedVariance(mod1, mod2)
-ExplainedVariance <- function(..., n = 1e4, rnd = 3) function (..., n = 10000, rnd = 3) {
+ExplainedVariance <- function(..., n = 1e4, rnd = 3) {
     mods <- list(...)
     nms <- deparse(substitute(list(...)))
     if (any(grepl("list\\(", nms))) {
