@@ -49,7 +49,7 @@ ExplainedVariance <- function(..., n = 1e4, rnd = 3) {
                                          1,
                                          function(x) sum(1/x, na.rm = TRUE))))
         }
-        if (lnegth(bym2) > 0) {
+        if (length(bym2) > 0) {
             hs2[bym2 + 1] <- hs2[bym2] * phi
             hs2[bym2] <- hs2[bym2] * (1 - phi)
         }
