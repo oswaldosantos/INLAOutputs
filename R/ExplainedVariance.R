@@ -38,7 +38,7 @@ ExplainedVariance <- function(..., n = 1e4, rnd = 3) {
                      function(x) any(x))
         hyper_sample <- hyper_sample[, idx]
         bym2 <- which("BYM2 model" %in% mods[[i]]$model.random)
-        if (lnegth(bym2) > 0) {
+        if (length(bym2) > 0) {
             phi <- summary(mods[[1]])$hyperpar$mean[bym2 + 1]
             hyper_sample[, bym2 + 1] <- NA
         }
