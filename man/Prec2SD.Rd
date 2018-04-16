@@ -10,8 +10,7 @@ Prec2SD(model, summarise = TRUE, sd = TRUE, quantiles = c(0.025, 0.975),
 \arguments{
 \item{model}{object of \code{\link{class}} \code{inla}.}
 
-\item{summarise}{\code{\link{logical}}. If \code{TRUE} (default), the posterior mean of the standard deviation is returned.
-#' @param summarise \code{\link{logical}}. If \code{TRUE} (default), the posterior standard deviation of the standard deviation is returned.}
+\item{summarise}{\code{\link{logical}}. If \code{TRUE} (default), the posterior mean of the standard deviation is returned.}
 
 \item{quantiles}{\code{\link{numeric}} \code{\link{vector}} to indicate the quantiles to be computed.}
 

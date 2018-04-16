@@ -2,7 +2,6 @@
 #' @description Transformation of precision to standard deviation of hyperparameters.
 #' @param model object of \code{\link{class}} \code{inla}.
 #' @param summarise \code{\link{logical}}. If \code{TRUE} (default), the posterior mean of the standard deviation is returned.
-#' #' @param summarise \code{\link{logical}}. If \code{TRUE} (default), the posterior standard deviation of the standard deviation is returned.
 #' @param quantiles \code{\link{numeric}} \code{\link{vector}} to indicate the quantiles to be computed.
 #' @param rnd integer indicating the number of decimal places to be used.
 #' @return \code{\link{matrix}} with summary statistics.
