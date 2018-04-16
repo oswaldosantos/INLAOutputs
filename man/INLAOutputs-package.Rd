@@ -11,8 +11,8 @@ Process selected outputs from the 'INLA' package
 \tabular{ll}{
 Package: \tab INLAOutputs\cr
 Type: \tab Package\cr
-Version: \tab 1.4.3\cr
-Date: \tab 2018-04-02\cr
+Version: \tab 1.4.4\cr
+Date: \tab 2018-04-16\cr
 Depends: \tab R (>= 3.4.1), INLA\cr
 License: \tab GPL (>= 2)\cr
 LazyLoad: \tab yes\cr
