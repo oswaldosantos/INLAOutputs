@@ -7,7 +7,7 @@
 CPO(..., failure_cutoff = 0, decreasing = TRUE, rnd = 3)
 }
 \arguments{
-\item{...}{models of \code{\link{class}} \code{inla} with computed CPO's.}
+\item{...}{objects of \code{\link{class}} \code{inla} with computed CPO's.}
 
 \item{failure_cutoff}{value between 0 and 1. CPO's with a failure score greater than \code{failure_cutoff} are considered unreliable and are ignored.}
 

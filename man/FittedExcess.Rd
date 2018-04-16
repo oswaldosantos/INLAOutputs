@@ -7,9 +7,9 @@
 FittedExcess(..., cutoff = 1, rnd = 3)
 }
 \arguments{
-\item{...}{object of \code{\link{class}} \code{inla} with fitted values.}
+\item{...}{objects of \code{\link{class}} \code{inla} with fitted values.}
 
-\item{cutoff}{value above which fittde values would be in excess.}
+\item{cutoff}{value above which fitted values would be in excess.}
 
 \item{rnd}{integer indicating the number of decimal places to be used.}
 }

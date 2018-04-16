@@ -1,6 +1,6 @@
 #' Conditional predictive ordinates
 #' @description Sort and display the sum of the log of CPO's of INLA models.
-#' @param ... models of \code{\link{class}} \code{inla} with computed CPO's.
+#' @param ... objects of \code{\link{class}} \code{inla} with computed CPO's.
 #' @param failure_cutoff value between 0 and 1. CPO's with a failure score greater than \code{failure_cutoff} are considered unreliable and are ignored.
 #' @param decreasing logical. If \code{TRUE} (default), CPO's are displayed in decreasing order (higher values indicate better prediction).
 #' @param rnd integer indicating the number of decimal places to be used.

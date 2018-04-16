@@ -7,9 +7,9 @@
 RandomEffectsExcess(..., cutoff = 0, rnd = 3)
 }
 \arguments{
-\item{...}{object of \code{\link{class}} \code{inla} with random marginals.}
+\item{...}{objects of \code{\link{class}} \code{inla} with random marginals.}
 
-\item{cutoff}{value above which random effects would be in excess. The cutoff is ued for untransformed marginal posteriors, so \code{cutoff = 0} (default) is used to calculate the probability of relative risk (odds ratio) > 1.}
+\item{cutoff}{value above which random effects would be in excess. The cutoff is used for untransformed marginal posteriors, so \code{cutoff = 0} (default) is used to calculate the probability of relative risk (odds ratio) > 1.}
 
 \item{rnd}{integer indicating the number of decimal places to be used.}
 }
