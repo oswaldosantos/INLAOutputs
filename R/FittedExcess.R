@@ -1,5 +1,5 @@
 #' Fitted values in excess
-#' @description @description Probability of fitted values being higher than a cutoff value.
+#' @description Probability of fitted values being higher than a cutoff value.
 #' @param ... objects of \code{\link{class}} \code{inla} with fitted values.
 #' @param cutoff value above which fitted values would be in excess.
 #' @param rnd integer indicating the number of decimal places to be used.

@@ -1,5 +1,5 @@
 #' Rnadom effects in excess
-#' @description @description Probability of random effects being higher than a cutoff value.
+#' @description Probability of random effects being higher than a cutoff value.
 #' @param ... objects of \code{\link{class}} \code{inla} with random marginals.
 #' @param cutoff value above which random effects would be in excess. The cutoff is used for untransformed marginal posteriors, so \code{cutoff = 0} (default) is used to calculate the probability of relative risk (odds ratio) > 1.
 #' @param rnd integer indicating the number of decimal places to be used.

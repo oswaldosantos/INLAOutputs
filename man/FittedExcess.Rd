@@ -17,7 +17,7 @@ FittedExcess(..., cutoff = 1, rnd = 3)
 \code{\link{vector}} if only one model with fitted values is evaluated; \code{\link{data.frame}} or \code{\link{list}} otherwise.
 }
 \description{
-@description Probability of fitted values being higher than a cutoff value.
+Probability of fitted values being higher than a cutoff value.
 }
 \examples{
 data(sp)

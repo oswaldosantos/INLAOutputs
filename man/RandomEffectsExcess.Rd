@@ -17,7 +17,7 @@ RandomEffectsExcess(..., cutoff = 0, rnd = 3)
 \code{\link{vector}} if only one model with one random effect is evaluated; \code{\link{data.frame}} or \code{\link{list}} otherwise.
 }
 \description{
-@description Probability of random effects being higher than a cutoff value.
+Probability of random effects being higher than a cutoff value.
 }
 \examples{
 data(sp)
