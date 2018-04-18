@@ -4,7 +4,8 @@
 \alias{PriorityIndex}
 \title{Priority index.}
 \usage{
-PriorityIndex(..., effect = NULL, cutoff = NULL, rnd = 1)
+PriorityIndex(..., effect = NULL, cutoff = NULL, rescale_by = NULL,
+  rnd = 1)
 }
 \arguments{
 \item{...}{objects of \code{\link{class}} \code{inla} with fitted values or random marginals.}
@@ -13,13 +14,16 @@ PriorityIndex(..., effect = NULL, cutoff = NULL, rnd = 1)
 
 \item{cutoff}{value above which fitted values or random effects would be in excess. If \code{effect = "random"}, the cutoff is used for untransformed marginal posteriors, so \code{cutoff = 0} (default) is used to calculate the probability of relative risk (odds ratio) > 1.}
 
-\item{rnd}{integer indicating the number of decimal places to be used.}
+\item{rescale_by}{column name or column index of the data used to fit the model. It works only when \code{effect = "fitted"}. See \code{Details}.}
 }
 \value{
-\code{\link{vector}} if only one model with fitted values is evaluated; \code{\link{data.frame}} or \code{\link{list}} otherwise.
+PI for each observation..PI values will be returned in a \code{\link{vector}} only if one model with fitted values (or one random effect) is evaluated; \code{\link{data.frame}} or \code{\link{list}} otherwise.
 }
 \description{
-@description Probability of fitted values being higher than a cutoff value.
+Priority index (PI) given by Fitted or random effects weighted by the probability of the effects being higher than a cutoff value. PI values are scaled shuch tath 0 <= PI <= 100.
+}
+\details{
+\code{rescale_by} is intended for spatiotemporal models, where \code{rescale_by} is the temporal variable. The result is a priority index rescaled within each temporal unit. If more than one model is provided to the first argument \code{...}, all of them must model the same spatiotemporal units.
 }
 \examples{
 data(sp)
