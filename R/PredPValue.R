@@ -38,7 +38,7 @@ PredPValue <- function(..., cutoff = c(0.1, 0.9), decreasing = FALSE, rnd = 3) {
         y_string <- substring(call,
                               y_rex + 10,
                               y_rex + attributes(y_rex)[[1]] - 2)
-        if(any(regexpr("E = [[:alnum:]|[:punct:]]+,", rr1$call) != -1)) {
+        if(any(regexpr("E = [[:alnum:]|[:punct:]]+,", call) != -1)) {
             e_rex <- regexpr("E = [[:alnum:]|[:punct:]]+,", call)
             e_string <- substring(call, e_rex + 4, e_rex + attributes(e_rex)[[1]] - 
                                       2)
