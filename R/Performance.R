@@ -74,8 +74,8 @@ Performance <- function (..., samples = NULL, regression = TRUE, threshold = NUL
             } else {
                 rocs <- roc(y_test, y_pred)
                 crds <- coords(rocs, x = "best")
-                threshold <- ifelse(is.null(threshold), crds[1], threshold)
-                y_pred <- ifelse(y_pred > threshold,
+                thrs <- ifelse(is.null(threshold), crds[1], threshold)
+                y_pred <- ifelse(y_pred > thrs,
                                  max(as.numeric(y)),
                                  min(as.numeric(y)))
                 acc <- c(acc, sum(y_test == y_pred) / length(y_test))
