@@ -57,7 +57,8 @@ PredPValue <- function(..., cutoff = c(0.1, 0.9), decreasing = FALSE, rnd = 3) {
                 q = y[i2],
                 marginal = mods[[i]]$marginals.fitted.values[[i2]])
         }
-        p_tails[i, ] <- round(c(sum(p <= .1)/ n, sum(p >= .9)/ n), rnd)
+        p_tails[i, ] <- round(c(sum(p <= .1, na.rm = TRUE)/ n,
+                                sum(p >= .9, na.rm = TRUE)/ n), rnd)
         ps[[i]] <- p
     }
     if (length(mods) > 1) {
