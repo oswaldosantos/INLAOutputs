@@ -1,7 +1,7 @@
 Package: INLAOutputs
 Type: Package
 Title: Process selected outputs from the 'INLA' package
-Depends: R (>= 3.4.1), INLA
+Depends: R (>= 3.4), INLA
 Description: Functions to return fixed and random effects, calculate measures
     of godness-of-fit and predictive performance, calculate random effects in
     excess, and calculate the proportion of variance explained by each
@@ -15,8 +15,8 @@ LazyLoad: yes
 URL: https://github.com/oswaldosantos/INLAOutputs
 Authors@R: c(person(given='Oswaldo', family='Santos Baquero',
     email='baquero@usp.br', role=c("aut", "cre")))
-Version: 1.4.9
-Date: 2018-05-09
+Version: 1.4.10
+Date: 2018-10-02
 NeedsCompilation: no
 Author: Oswaldo Santos Baquero [aut, cre]
 Maintainer: Oswaldo Santos Baquero <baquero@usp.br>
