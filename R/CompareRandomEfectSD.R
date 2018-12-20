@@ -7,8 +7,8 @@
 #' @export
 #' @examples 
 #'
-CompareRandomEfectSD <- function(mod1 = NULL, mod2 = NUll, rnd = 1, percentage = TRUE) {
-    if(length(setdiff(RR1$model.random, c3b$model.random)) != 0) {
+CompareRandomEfectSD <- function(mod1 = NULL, mod2 = NULL, rnd = 1, percentage = TRUE) {
+    if(length(setdiff(mod1$model.random, mod2$model.random)) != 0) {
         stop("mod1 and mod2 must have the same random effects.")
     }
     nms <- rownames(Prec2SD(mod1))

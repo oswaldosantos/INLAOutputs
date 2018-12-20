@@ -3,9 +3,9 @@
 #' \tabular{ll}{
 #' Package: \tab INLAOutputs\cr
 #' Type: \tab Package\cr
-#' Version: \tab 1.4.10\cr
-#' Date: \tab 2018-10-02\cr
-#' Depends: \tab R (>= 3.4), INLA\cr
+#' Version: \tab 1.4.11\cr
+#' Date: \tab 2018-12-20\cr
+#' Depends: \tab R (>= 3.5), INLA\cr
 #' License: \tab GPL (>= 2)\cr
 #' LazyLoad: \tab yes\cr
 #' URL: \tab \url{https://github.com/oswaldosantos/INLAOutputs}\cr

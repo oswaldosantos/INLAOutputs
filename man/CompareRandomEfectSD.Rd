@@ -4,7 +4,7 @@
 \alias{CompareRandomEfectSD}
 \title{Compare two mdoles in terms of the standard deviation of their Random effects}
 \usage{
-CompareRandomEfectSD(mod1 = NULL, mod2 = NUll, rnd = 1,
+CompareRandomEfectSD(mod1 = NULL, mod2 = NULL, rnd = 1,
   percentage = TRUE)
 }
 \arguments{

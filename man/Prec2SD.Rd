@@ -4,8 +4,8 @@
 \alias{Prec2SD}
 \title{Standard deviation of hyperparameters}
 \usage{
-Prec2SD(model, summarise = TRUE, sd = TRUE, quantiles = c(0.025, 0.975),
-  rnd = 3)
+Prec2SD(model, summarise = TRUE, sd = TRUE, quantiles = c(0.025,
+  0.975), rnd = 3)
 }
 \arguments{
 \item{model}{object of \code{\link{class}} \code{inla}.}

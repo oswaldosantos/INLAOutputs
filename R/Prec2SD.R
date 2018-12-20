@@ -14,8 +14,6 @@
 #' Prec2SD(mod)
 Prec2SD <- function(model, summarise = TRUE, sd = TRUE, quantiles = c(.025, .975), rnd = 3) {
   hypers <- model$marginals.hyperpar
-  summarise = T
-  i=1
   for (i in 1:length(hypers)) {
     if (grepl("Precision", names(hypers)[[i]])) {
       hypers[[i]] <- round(inla.tmarginal(function(x) sqrt(1/x), hypers[[i]]), rnd)
