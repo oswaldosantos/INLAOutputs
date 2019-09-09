@@ -17,7 +17,7 @@ The `INLAOutputs` package has functions for the following tasks:
 
 * The functions to process random effects accept more than one model and process all random effects of each model.
 
-* The functions to calculate measure of godness-of-fit and predictive preformance also accept more than one model and return models in order given by the performance.
+* The functions to calculate measure of godness-of-fit and predictive performance also accept more than one model and return models in order given by the performance.
 
 To install `INLAOutputs`, use `install_github('oswaldosantos/INLAOutputs')` (make sure that `devtools` package is loaded).
 
